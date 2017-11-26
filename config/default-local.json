@@ -1,0 +1,7 @@
+{
+  "connections": {
+    "web": {
+      "url": "http://localhost:3030"
+    }
+  }
+}
