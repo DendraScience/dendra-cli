@@ -76,6 +76,7 @@ function processGroup (group, maxWidth, p, output, cb) {
 
 function commandHelp (config, p) {
   const output = [
+    EMPTY,
     ' _| _ _  _| _ _ ',
     '(_|(-| )(_|| (_| CLI 1.0',
     EMPTY

@@ -44,3 +44,7 @@ compost
 *.brd.lck
 *.sch.lck
 eagle.epf
+
+# Project extras
+pkg_archive
+pkg_output

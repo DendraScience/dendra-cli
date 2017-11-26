@@ -77,7 +77,7 @@ function processGroup(group, maxWidth, p, output, cb) {
 }
 
 function commandHelp(config, p) {
-  const output = [' _| _ _  _| _ _ ', '(_|(-| )(_|| (_| CLI 1.0', EMPTY];
+  const output = [EMPTY, ' _| _ _  _| _ _ ', '(_|(-| )(_|| (_| CLI 1.0', EMPTY];
   const ttyWidth = process.stdout.columns;
   const maxWidth = ttyWidth - 3;
   let showingCommon;
