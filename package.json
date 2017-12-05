@@ -1,6 +1,6 @@
 {
   "name": "@dendra-science/dendra-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dendra command line interface tool.",
   "license": "BSD-2-Clause-FreeBSD",
   "author": "J. Scott Smith <scott@newleafsolutionsinc.com>",

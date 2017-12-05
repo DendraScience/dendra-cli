@@ -27,7 +27,21 @@ module.exports = ctx => {
           items: [{ cmd: 'help', desc: 'Show help on commands' }, {}, { cmd: 'init', desc: 'Create a project settings file (den.json) in the current directory' }, { cmd: 'login', desc: 'Log in to a Dendra environment, prompt for credentials if not provided' }, { cmd: 'logout', desc: 'Log out of a Dendra environment' }, { cmd: 'whoami', desc: 'Display the logged in user and environment' }]
         }, {
           header: 'Subcommands',
-          items: [{ cmd: 'cli', sub: 'help', desc: 'Show help on CLI subcommands' }, { cmd: 'cli', sub: '<sub>', desc: 'Run a CLI subcommand' }, {}, { cmd: 'json', sub: 'help', desc: 'Show help on JSON subcommands' }, { cmd: 'json', sub: '<sub>', desc: 'Run a JSON subcommand' }, {}, { cmd: 'meta', sub: 'help', desc: 'Show help on metadata subcommands' }, { cmd: 'meta', sub: '<sub>', desc: 'Run a metadata subcommand' }, {}, { cmd: 'system', sub: 'help', desc: 'Show help on system subcommands' }, { cmd: 'system', sub: '<sub>', desc: 'Run a system subcommand' }, {}, { cmd: 'version', sub: 'help', desc: 'Show help on version subcommands' }, { cmd: 'version', sub: '<sub>', desc: 'Run a version subcommand' }, { cmd: 'version', desc: 'Show Dendra version info' }]
+          items: [{ cmd: 'cli', sub: 'help', desc: 'Show help on CLI subcommands' }, { cmd: 'cli', sub: '<sub>', desc: 'Run a CLI subcommand' },
+
+          // JSS: Not implemented
+          // {},
+          // {cmd: 'json', sub: 'help', desc: 'Show help on JSON subcommands'},
+          // {cmd: 'json', sub: '<sub>', desc: 'Run a JSON subcommand'},
+
+          {}, { cmd: 'meta', sub: 'help', desc: 'Show help on metadata subcommands' }, { cmd: 'meta', sub: '<sub>', desc: 'Run a metadata subcommand' }, {}, { cmd: 'system', sub: 'help', desc: 'Show help on system subcommands' }, { cmd: 'system', sub: '<sub>', desc: 'Run a system subcommand'
+
+            // JSS: Not implemented
+            // {},
+            // {cmd: 'version', sub: 'help', desc: 'Show help on version subcommands'},
+            // {cmd: 'version', sub: '<sub>', desc: 'Run a version subcommand'},
+            // {cmd: 'version', desc: 'Show Dendra version info'}
+          }]
         }]
       }, p);
     },

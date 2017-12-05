@@ -11,7 +11,7 @@
 const moment = require('moment');
 
 const MOMENT_FORMATS = ['M/D/YY', 'M/D/YYTh:mma', 'M/D/YYTh:mm:ssa', 'M/D/YYYY', 'M/D/YYYYTh:mma', 'M/D/YYYYTh:mm:ssa', 'D-M-YY', 'D-M-YYTH:mm', 'D-M-YYTH:mm:ss', 'D-M-YYYY', 'D-M-YYYYTH:mm', 'D-M-YYYYTH:mm:ss', 'YYYY-M-D', 'YYYY-M-DTH:mm', 'YYYY-M-DTH:mm:ss', 'YYYY-M-DTH:mmZ', 'YYYY-M-DTH:mm:ssZ'];
-const RESERVED_REGEX = /^(_|_sliced|dir|dry_run|file|filespec|limit|output|query|save|sort|sort:asc|sort:desc|verbose)$/;
+const RESERVED_REGEX = /^(_|_sliced|dir|dry-run|dry_run|file|filespec|limit|output|query|save|sort|sort:asc|sort:desc|verbose)$/;
 const BOOL_REGEX = /^(false|true)$/i;
 
 function queryArgs(p, tableOpts, override) {

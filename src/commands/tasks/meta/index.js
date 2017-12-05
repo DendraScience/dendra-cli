@@ -122,8 +122,8 @@ module.exports = (ctx) => {
           {lbl: 'meta', cmd: 'update-*', opts: '[--id=<id>] [--file=<file>] [--save] [--output=color|indent|raw]'},
           {lbl: 'meta', cmd: 'remove-*', opts: '--id=<id> [--confirm] [--save] [--output=color|indent|raw]'},
           {},
-          {lbl: 'meta', cmd: 'push-*', opts: '--filespec=<filespec> [--save] [--only=create|update] [--any_suffix] [--dry_run] [--verbose]'},
-          {lbl: 'meta', cmd: 'pull-*', opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--output=color|indent|raw] [--dry_run] [--verbose]'}
+          {lbl: 'meta', cmd: 'push-*', opts: '--filespec=<filespec> [--save] [--only=create|update] [--any-suffix] [--dry-run] [--verbose]'},
+          {lbl: 'meta', cmd: 'pull-*', opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--output=color|indent|raw] [--dry-run] [--verbose]'}
         ],
         groups: [{
           header: 'Common Options',
@@ -148,8 +148,8 @@ module.exports = (ctx) => {
             {opts: '--dir=<dir>', desc: 'Name of directory to save files to'},
             {opts: '--filespec=<filespec>', desc: 'Pattern to match one or more files'},
             {opts: '--only=<verb>', desc: 'Restrict uploading to create or update'},
-            {opts: '--any_suffix', desc: 'Process all matching files (don\'t require "*.<resource>.json")'},
-            {opts: '--dry_run', desc: 'Process files and records without doing anything'},
+            {opts: '--any-suffix', desc: 'Process all matching files (don\'t require "*.<resource>.json")'},
+            {opts: '--dry-run', desc: 'Process files and records without doing anything'},
             {opts: '--verbose', desc: 'Output additional messages'}
           ]
         }, {

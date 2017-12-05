@@ -32,7 +32,12 @@ process.on('unhandledRejection', err => {
 require('./app')(log).then(app => {
   const args = process.argv.slice(2)
   const parsed = mri(args, {
+    alias: {
+      any_suffix: 'any-suffix',
+      dry_run: 'dry-run'
+    },
     boolean: [
+      'any_suffix',
       'confirm',
       'dry_run',
       'verbose'

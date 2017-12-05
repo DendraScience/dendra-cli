@@ -10,9 +10,7 @@ const utils = require('../lib/utils');
 const valid = require('../lib/valid');
 const { TaskCommand } = require('@dendra-science/task-command');
 
-module.exports = function () {
-  const app = this;
-
+module.exports = function (app) {
   // Decorate app with the command processor
   // TODO: Do this better - perhaps mixin eval
   app.command = new TaskCommand(tasks({
