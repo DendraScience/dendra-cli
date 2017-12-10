@@ -1,4 +1,5 @@
 const inquirer = require('inquirer')
+const ora = require('ora')
 const {removeOne, removeMany} = require('./_remove')
 
 module.exports = (ctx) => {
@@ -43,9 +44,18 @@ module.exports = (ctx) => {
       }
 
       const output = []
+
+      let count = 0
+      let spinner
       let station
 
       if (confirmDeep) {
+        spinner = ora({
+          spinner: 'bouncingBar',
+          stream: process.stdout,
+          text: 'Removing...'
+        }).start()
+
         await removeMany(ctx, {
           output,
           p,
@@ -54,6 +64,9 @@ module.exports = (ctx) => {
           },
           resource: 'datastream',
           servicePath: '/datastreams'
+        }, id => {
+          count++
+          spinner.text = `Removing datastream: ${id}`
         })
       }
 
@@ -64,10 +77,15 @@ module.exports = (ctx) => {
           p,
           resource: 'station',
           servicePath: '/stations'
+        }, id => {
+          count++
+          if (spinner) spinner.text = `Removing station: ${id}`
         })
       }
 
-      if (confirmDeep) {
+      if (spinner) {
+        spinner.succeed(`Removed ${count} resources(s)`)
+
         output.push(style.EMPTY)
         output.push('Done!')
 

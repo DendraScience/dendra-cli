@@ -17,6 +17,7 @@ module.exports = (ctx) => {
 
     async execute (p) {
       const output = []
+
       await cloneOne(ctx, {
         id: p.id,
         output,

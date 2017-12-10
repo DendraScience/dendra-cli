@@ -6,7 +6,8 @@
  * @module meta/_remove
  */
 
-async function removeOne ({conns, file}, {id, output, override, p, resource, servicePath}) {
+async function removeOne ({conns, file}, {id, output, override, p, resource, servicePath}, cb) {
+  if (cb) cb(id)
   let res = await conns.web.app.service(servicePath).remove(id)
 
   if (p.verbose) output.push([{text: 'Removed', tail: ':', bold: true}, {text: resource, bold: true}, {text: res._id, bold: true}])
@@ -22,7 +23,7 @@ async function removeOne ({conns, file}, {id, output, override, p, resource, ser
 
 exports.removeOne = removeOne
 
-async function removeMany (ctx, {output, p, query, resource, servicePath}) {
+async function removeMany (ctx, {output, p, query, resource, servicePath}, cb) {
   const {conns} = ctx
   const $limit = 10
   const $select = ['_id']
@@ -47,7 +48,7 @@ async function removeMany (ctx, {output, p, query, resource, servicePath}) {
         p,
         resource,
         servicePath
-      })
+      }, cb)
     }
 
     $skip += $limit
