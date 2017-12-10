@@ -19,12 +19,12 @@ module.exports = function (app) {
     check,
     conns: app.get('connections'),
     file,
+    mergedSettings: app.get('mergedSettings'),
     parse,
     projectSettings: app.get('projectSettings'),
     style,
     userSettings: app.get('userSettings'),
     utils,
-    valid,
-    workspaceEnv: app.get('workspaceEnv')
+    valid
   }));
 };

@@ -1,6 +1,7 @@
 const path = require('path')
 
 const COMMANDS = [
+  {prop: 'clone-datastream', req: 'clone-datastream'},
   {prop: 'create-datastream', req: 'create-resource', resource: 'datastream', servicePath: '/datastreams'},
   {prop: 'get-datastream', req: 'get-resource-objectId', resource: 'datastream', servicePath: '/datastreams'},
   {prop: 'list-datastreams', req: 'list-datastreams'},
@@ -57,12 +58,13 @@ const COMMANDS = [
   {prop: 'remove-som', req: 'remove-resource-objectId', resource: 'som', servicePath: '/soms'},
   {prop: 'update-som', req: 'update-resource', resource: 'som', servicePath: '/soms'},
 
+  {prop: 'clone-station', req: 'clone-station'},
   {prop: 'create-station', req: 'create-resource', resource: 'station', servicePath: '/stations'},
   {prop: 'get-station', req: 'get-resource-objectId', resource: 'station', servicePath: '/stations'},
   {prop: 'list-stations', req: 'list-stations'},
   {prop: 'pull-stations', req: 'pull-resources', resource: 'station', servicePath: '/stations', title: 'Stations'},
   {prop: 'push-stations', req: 'push-resources', resource: 'station', servicePath: '/stations', title: 'Stations'},
-  {prop: 'remove-station', req: 'remove-resource-objectId', resource: 'station', servicePath: '/stations'},
+  {prop: 'remove-station', req: 'remove-station'},
   {prop: 'update-station', req: 'update-resource', resource: 'station', servicePath: '/stations'},
 
   {prop: 'create-thing', req: 'create-resource', resource: 'thing', servicePath: '/things'},
@@ -120,19 +122,20 @@ module.exports = (ctx) => {
           {},
           {lbl: 'meta', cmd: 'create-*', opts: '[--id=<id>] [--file=<file>] [--save] [--output=color|indent|raw]'},
           {lbl: 'meta', cmd: 'update-*', opts: '[--id=<id>] [--file=<file>] [--save] [--output=color|indent|raw]'},
-          {lbl: 'meta', cmd: 'remove-*', opts: '--id=<id> [--confirm] [--save] [--output=color|indent|raw]'},
+          {lbl: 'meta', cmd: 'clone-*', opts: '--id=<id> [--deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'},
+          {lbl: 'meta', cmd: 'remove-*', opts: '--id=<id> [--deep] [--confirm] [--confirm-deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'},
           {},
           {lbl: 'meta', cmd: 'push-*', opts: '--filespec=<filespec> [--save] [--only=create|update] [--any-suffix] [--dry-run] [--verbose]'},
-          {lbl: 'meta', cmd: 'pull-*', opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--output=color|indent|raw] [--dry-run] [--verbose]'}
+          {lbl: 'meta', cmd: 'pull-*', opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--output=indent|raw] [--dry-run] [--verbose]'}
         ],
         groups: [{
           header: 'Common Options',
           items: [
             {opts: '--id=<id>', desc: 'Unique identifier of a resource, can be an ObjectId'},
             {opts: '--file=<file>', desc: 'Name of file to load from or save to'},
-            {opts: '--confirm', desc: 'Immediately destroy, don\'t prompt for confirmation'},
             {opts: '--save', desc: 'Write the response of this command back to a file'},
-            {opts: '--output=<format>', desc: 'Override the default output format'}
+            {opts: '--output=<format>', desc: 'Override the default output format'},
+            {opts: '--verbose', desc: 'Output additional messages'}
           ]
         }, {
           header: 'Query Options',
@@ -143,20 +146,28 @@ module.exports = (ctx) => {
             {opts: '--sort[:desc]=<field>', desc: 'Sort records by field'}
           ]
         }, {
+          header: 'Clone/Remove Options',
+          items: [
+            {opts: '--deep', desc: 'Process this resource and all associated child resources'},
+            {opts: '--confirm', desc: 'Suppress confirmation prompt (set --confirm=false for "no")'},
+            {opts: '--confirm-deep', desc: 'Suppress deep confirmation prompt (set --confirm-deep=false for "no")'}
+          ]
+        }, {
           header: 'Push/Pull Options',
           items: [
             {opts: '--dir=<dir>', desc: 'Name of directory to save files to'},
             {opts: '--filespec=<filespec>', desc: 'Pattern to match one or more files'},
             {opts: '--only=<verb>', desc: 'Restrict uploading to create or update'},
             {opts: '--any-suffix', desc: 'Process all matching files (don\'t require "*.<resource>.json")'},
-            {opts: '--dry-run', desc: 'Process files and records without doing anything'},
-            {opts: '--verbose', desc: 'Output additional messages'}
+            {opts: '--dry-run', desc: 'Process files and records without doing anything'}
           ]
         }, {
           header: 'Subcommands',
           items: [
             {cmd: 'get-<resource>', desc: 'Fetch a <resource> having <id>'},
             {cmd: 'list-<resources>', desc: 'Find <resources> matching <query> or fields'},
+            {cmd: 'clone-datastream', desc: 'Clone datastream <id>'},
+            {cmd: 'clone-station', desc: 'Clone station <id>'},
             {cmd: 'create-<resource>', desc: 'Insert a new <resource> from <file> or "<id>.<resource>.json"'},
             {cmd: 'update-<resource>', desc: 'Replace <resource> from <file> or "<id>.<resource>.json"'},
             {cmd: 'remove-<resource>', desc: 'Destroy <resource> <id>'},

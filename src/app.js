@@ -9,7 +9,7 @@
 const path = require('path')
 const feathers = require('@feathersjs/feathers')
 const boot = require('./boot')
-// NOTE: This needs to be done late so we can set NODE_APP_INSTANCE based on the environemnt
+// NOTE: This needs to be done late so we can set NODE_APP_INSTANCE based on the environment
 // const configuration = require('@feathersjs/configuration')
 const connections = require('./connections')
 const commands = require('./commands')
@@ -30,14 +30,14 @@ module.exports = async (log) => {
    */
 
   process.env.NODE_CONFIG_DIR = path.resolve(__dirname, '../config')
-  process.env.NODE_APP_INSTANCE = app.get('workspaceEnv')
+  process.env.NODE_APP_INSTANCE = app.get('mergedSettings').content.environment
 
   // Configure
   app.configure(require('@feathersjs/configuration')())
 
   // Feathers setup
   app.configure(connections)
-    .configure(commands)
+  app.configure(commands)
 
   return app
 }

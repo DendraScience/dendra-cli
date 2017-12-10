@@ -9,7 +9,7 @@ const murmurHash3 = require('murmurhash3js');
 
 module.exports = function (app) {
   const connections = app.get('connections') || {};
-  const userSettings = app.get('userSettings') || {};
+  const userSettings = app.get('userSettings');
   const tokens = userSettings.content.tokens || {};
 
   Object.keys(tokens).forEach(key => localStorage.setItem(key, tokens[key]));

@@ -10,7 +10,7 @@ module.exports = ({ conns, file }, { resource, servicePath }) => {
 
     execute(p) {
       return file.loadJson(p, {
-        file: p.id && `${p.id}.station.json`
+        file: p.id && `${p.id}.${resource}.json`
       }).then(data => {
         if (p.id) data._id = p.id;
         return conns.web.app.service(servicePath).update(data._id, data);

@@ -24,6 +24,8 @@ const WRITE_OPTIONS = {
     return content;
   }
 
+  // TODO: Add getByDot and setByDot methods?
+
   /**
    * Load and optionally create a settings file.
    */

@@ -1,6 +1,9 @@
 const inquirer = require('inquirer')
+const {removeOne} = require('./_remove')
 
-module.exports = ({conns, file, valid}, {resource, servicePath}) => {
+module.exports = (ctx, {resource, servicePath}) => {
+  const {valid} = ctx
+
   return {
     pre (p) {
       return Object.assign({
@@ -18,18 +21,20 @@ module.exports = ({conns, file, valid}, {resource, servicePath}) => {
         const answers = await inquirer.prompt([{
           type: 'confirm',
           default: false,
-          message: `Destroy ${resource} ${p.id}`,
+          message: `Remove ${resource} ${p.id}`,
           name: 'confirm'
         }])
 
         if (!answers.confirm) return
       }
 
-      return conns.web.app.service(servicePath).remove(p.id)
-        .then(res => file.saveJson(res, p, {
-          file: `${res._id}.${resource}.json`,
-          save: p.file
-        }))
+      return removeOne(ctx, {
+        id: p.id,
+        output: [],
+        p,
+        resource,
+        servicePath
+      })
     }
   }
 }

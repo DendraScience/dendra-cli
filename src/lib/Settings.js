@@ -23,6 +23,8 @@ class Settings {
     return content
   }
 
+  // TODO: Add getByDot and setByDot methods?
+
   /**
    * Load and optionally create a settings file.
    */

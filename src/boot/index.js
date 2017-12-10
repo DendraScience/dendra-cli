@@ -5,11 +5,12 @@ module.exports = async (app) => {
   await userSettings(app)
   await projectSettings(app)
 
-  const workspaceEnv =
-    app.get('projectSettings').safeContent.environment ||
-    app.get('userSettings').safeContent.environment
+  // TODO: Refactor into MergedSettings class?
+  const mergedSettings = {
+    content: Object.assign({}, app.get('userSettings').safeContent, app.get('projectSettings').safeContent)
+  }
 
-  if (!workspaceEnv) throw new Error('Workspace environment is undefined')
+  if (!mergedSettings.content.environment) throw new Error('Workspace environment is undefined')
 
-  app.set('workspaceEnv', workspaceEnv)
+  app.set('mergedSettings', mergedSettings)
 }

@@ -14,7 +14,7 @@ module.exports = ({conns, file, style, utils, valid}, {resource, servicePath, ti
         nodir: true
       })
       const suffix = `.${resource}.json`
-      let output = []
+      const output = []
 
       if (!(files && files.length)) output.push('No files found')
 

@@ -2,7 +2,7 @@
 
 const inquirer = require('inquirer');
 
-module.exports = ({ check, conns, userSettings, utils, workspaceEnv }) => {
+module.exports = ({ check, conns, mergedSettings, userSettings, utils }) => {
   return {
     pre(p) {
       return Object.assign({
@@ -54,7 +54,7 @@ module.exports = ({ check, conns, userSettings, utils, workspaceEnv }) => {
     },
 
     format(p, res) {
-      return `Hello ${res.name}, you are logged in to: ${workspaceEnv}`;
+      return `Hello ${res.name}, you are logged in to: ${mergedSettings.content.environment}`;
     }
   };
 };

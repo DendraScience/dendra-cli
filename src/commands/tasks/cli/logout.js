@@ -1,4 +1,4 @@
-module.exports = ({conns, userSettings, utils, workspaceEnv}) => {
+module.exports = ({conns, mergedSettings, userSettings, utils}) => {
   return {
     async execute (p) {
       // Remove access token
@@ -9,7 +9,7 @@ module.exports = ({conns, userSettings, utils, workspaceEnv}) => {
     },
 
     format () {
-      return `You are logged out of: ${workspaceEnv}`
+      return `You are logged out of: ${mergedSettings.content.environment}`
     }
   }
 }

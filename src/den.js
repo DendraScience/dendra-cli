@@ -34,11 +34,15 @@ require('./app')(log).then(app => {
   const parsed = mri(args, {
     alias: {
       any_suffix: 'any-suffix',
+      confirm_deep: 'confirm-deep',
       dry_run: 'dry-run'
     },
+    default: app.get('mergedSettings').content.default,
     boolean: [
       'any_suffix',
       'confirm',
+      'confirm_deep',
+      'deep',
       'dry_run',
       'verbose'
     ],
