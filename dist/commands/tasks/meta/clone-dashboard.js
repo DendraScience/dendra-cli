@@ -24,12 +24,13 @@ module.exports = ctx => {
         id: p.id,
         output,
         p,
-        resource: 'datastream',
-        servicePath: '/datastreams'
+        resource: 'dashboard',
+        servicePath: '/dashboards'
       }, res => {
         delete res._id;
         res.enabled = false;
         res.name = `${res.name} (Clone)`;
+        if (res.slug) res.slug = `${res.slug}-clone`;
 
         return res;
       });

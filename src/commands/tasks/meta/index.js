@@ -1,6 +1,15 @@
 const path = require('path')
 
 const COMMANDS = [
+  {prop: 'clone-dashboard', req: 'clone-dashboard'},
+  {prop: 'create-dashboard', req: 'create-resource', resource: 'dashboard', servicePath: '/dashboards'},
+  {prop: 'get-dashboard', req: 'get-resource-objectId', resource: 'dashboard', servicePath: '/dashboards'},
+  {prop: 'list-dashboards', req: 'list-dashboards'},
+  {prop: 'pull-dashboards', req: 'pull-dashboards', resource: 'dashboard', servicePath: '/dashboards', title: 'Dashboards'},
+  {prop: 'push-dashboards', req: 'push-resources', resource: 'dashboard', servicePath: '/dashboards', title: 'Dashboards'},
+  {prop: 'remove-dashboard', req: 'remove-resource-objectId', resource: 'dashboard', servicePath: '/dashboards'},
+  {prop: 'update-dashboard', req: 'update-resource', resource: 'dashboard', servicePath: '/dashboards'},
+
   {prop: 'clone-datastream', req: 'clone-datastream'},
   {prop: 'create-datastream', req: 'create-resource', resource: 'datastream', servicePath: '/datastreams'},
   {prop: 'get-datastream', req: 'get-resource-objectId', resource: 'datastream', servicePath: '/datastreams'},
@@ -166,6 +175,7 @@ module.exports = (ctx) => {
           items: [
             {cmd: 'get-<resource>', desc: 'Fetch a <resource> having <id>'},
             {cmd: 'list-<resources>', desc: 'Find <resources> matching <query> or fields'},
+            {cmd: 'clone-dashboard', desc: 'Clone dashboard <id>'},
             {cmd: 'clone-datastream', desc: 'Clone datastream <id>'},
             {cmd: 'clone-station', desc: 'Clone station <id>'},
             {cmd: 'create-<resource>', desc: 'Insert a new <resource> from <file> or "<id>.<resource>.json"'},
@@ -177,6 +187,7 @@ module.exports = (ctx) => {
         }, {
           header: 'Resources',
           items: [
+            {lbl: 'dashboard[s]', desc: 'A collection of graphs and widgets displaying realtime data'},
             {lbl: 'datastream[s]', desc: 'A continuous series of datapoints indexed in time order'},
             {lbl: 'membership[s]', desc: 'An affiliation between a person and an organization'},
             {lbl: 'organization[s]', desc: 'An association, group, or research organization'},
