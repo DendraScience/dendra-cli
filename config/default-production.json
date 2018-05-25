@@ -1,0 +1,7 @@
+{
+  "connections": {
+    "web": {
+      "url": "http://api.dendra.science/v1"
+    }
+  }
+}
