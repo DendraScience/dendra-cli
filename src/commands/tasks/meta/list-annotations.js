@@ -10,16 +10,16 @@ module.exports = ({ conns, file, parse, style }) => {
       parse.queryArgs(p, {
         $select: [
           '_id',
-          'description',
-          'label',
-          'scheme_id',
-          'vocabulary_type'
+          'begins_at',
+          'enabled',
+          'ends_before',
+          'title'
         ]
       })
     },
 
     execute (p) {
-      return conns.web.app.service('/vocabularies').find({ query: p.query })
+      return conns.web.app.service('/annotations').find({ query: p.query })
         .then(res => file.saveJson(res, p, {
           save: p.file
         }))
@@ -30,19 +30,18 @@ module.exports = ({ conns, file, parse, style }) => {
         name: '_id',
         size: 24
       }, {
-        name: 'scheme_id',
-        size: 12
+        alias: 'enab?',
+        name: 'enabled',
+        size: 5
       }, {
-        alias: 'type',
-        name: 'vocabulary_type',
-        size: 12
+        name: 'begins_at',
+        size: 24
+      }, {
+        name: 'ends_before',
+        size: 24
       }, {
         mode: 'fill',
-        name: 'label',
-        size: 18
-      }, {
-        mode: 'fill',
-        name: 'description',
+        name: 'title',
         size: 36
       }], p)
     }

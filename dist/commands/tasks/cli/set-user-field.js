@@ -1,6 +1,12 @@
-'use strict';
+"use strict";
 
-module.exports = ({ parse, style, userSettings, utils, valid }) => {
+module.exports = ({
+  parse,
+  style,
+  userSettings,
+  utils,
+  valid
+}) => {
   return {
     pre(p) {
       return Object.assign({
@@ -23,5 +29,6 @@ module.exports = ({ parse, style, userSettings, utils, valid }) => {
       await userSettings.save();
       return userSettings.safeContent;
     }
+
   };
 };

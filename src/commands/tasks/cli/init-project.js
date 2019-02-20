@@ -1,4 +1,4 @@
-module.exports = ({projectSettings}) => {
+module.exports = ({ projectSettings }) => {
   return {
     execute () {
       return projectSettings.init({

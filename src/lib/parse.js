@@ -69,7 +69,7 @@ function queryArgs (p, tableOpts, override) {
 
     if (op) {
       if (!q[fld]) q[fld] = {}
-      if (typeof q[fld] !== 'object') q[fld] = {$eq: val}
+      if (typeof q[fld] !== 'object') q[fld] = { $eq: val }
 
       q[fld][`$${op}`] = val
     } else {
@@ -85,8 +85,8 @@ function queryArgs (p, tableOpts, override) {
   }
   const ascSort = p['sort:asc'] || p.sort
   const descSort = p['sort:desc']
-  if (typeof ascSort === 'string') queryOpts.$sort = {[ascSort]: 1}
-  else if (typeof descSort === 'string') queryOpts.$sort = {[descSort]: -1}
+  if (typeof ascSort === 'string') queryOpts.$sort = { [ascSort]: 1 }
+  else if (typeof descSort === 'string') queryOpts.$sort = { [descSort]: -1 }
 
   if (p.file || (p.output && p.output !== 'table')) tableOpts = {}
 

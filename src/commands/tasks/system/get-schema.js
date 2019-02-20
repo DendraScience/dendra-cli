@@ -1,4 +1,4 @@
-module.exports = ({conns, file, valid}) => {
+module.exports = ({ conns, file, valid }) => {
   return {
     pre (p) {
       return Object.assign({

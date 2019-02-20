@@ -1,4 +1,4 @@
-module.exports = ({conns, mergedSettings, userSettings, utils}) => {
+module.exports = ({ conns, mergedSettings, userSettings, utils }) => {
   return {
     async execute (p) {
       // Remove access token

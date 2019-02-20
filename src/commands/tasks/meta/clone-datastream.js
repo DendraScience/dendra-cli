@@ -1,7 +1,7 @@
-const {cloneOne} = require('./_clone')
+const { cloneOne } = require('./_clone')
 
 module.exports = (ctx) => {
-  const {style, valid} = ctx
+  const { style, valid } = ctx
 
   return {
     pre (p) {

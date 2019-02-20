@@ -1,11 +1,18 @@
-'use strict';
+"use strict";
 
 const inquirer = require('inquirer');
-const { removeOne } = require('./_remove');
 
-module.exports = (ctx, { resource, servicePath }) => {
-  const { valid } = ctx;
+const {
+  removeOne
+} = require('./_remove');
 
+module.exports = (ctx, {
+  resource,
+  servicePath
+}) => {
+  const {
+    valid
+  } = ctx;
   return {
     pre(p) {
       return Object.assign({
@@ -26,7 +33,6 @@ module.exports = (ctx, { resource, servicePath }) => {
           message: `Remove ${resource} ${p.id}`,
           name: 'confirm'
         }]);
-
         if (!answers.confirm) return;
       }
 
@@ -38,5 +44,6 @@ module.exports = (ctx, { resource, servicePath }) => {
         servicePath
       });
     }
+
   };
 };

@@ -1,8 +1,8 @@
 const ora = require('ora')
-const {cloneOne, cloneMany} = require('./_clone')
+const { cloneOne, cloneMany } = require('./_clone')
 
 module.exports = (ctx) => {
-  const {style, valid} = ctx
+  const { style, valid } = ctx
 
   return {
     pre (p) {

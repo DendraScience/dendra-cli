@@ -1,4 +1,4 @@
-module.exports = ({conns, file, parse, style}) => {
+module.exports = ({ conns, file, parse, style }) => {
   return {
     pre (p) {
       return Object.assign({
@@ -17,7 +17,7 @@ module.exports = ({conns, file, parse, style}) => {
     },
 
     execute (p) {
-      return conns.web.app.service('/organizations').find({query: p.query})
+      return conns.web.app.service('/organizations').find({ query: p.query })
         .then(res => file.saveJson(res, p, {
           save: p.file
         }))

@@ -1,4 +1,4 @@
-module.exports = ({conns, file, valid}, {resource, servicePath}) => {
+module.exports = ({ conns, file, valid }, { resource, servicePath }) => {
   return {
     pre (p) {
       return Object.assign({

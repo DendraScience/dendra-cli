@@ -1,4 +1,4 @@
-module.exports = ({check, parse, projectSettings, style, utils, valid}) => {
+module.exports = ({ check, parse, projectSettings, style, utils, valid }) => {
   return {
     pre (p) {
       return Object.assign({

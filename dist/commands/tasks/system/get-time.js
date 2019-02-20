@@ -1,6 +1,10 @@
-'use strict';
+"use strict";
 
-module.exports = ({ conns, file, valid }) => {
+module.exports = ({
+  conns,
+  file,
+  valid
+}) => {
   return {
     pre(p) {
       return Object.assign({
@@ -19,5 +23,6 @@ module.exports = ({ conns, file, valid }) => {
         save: p.file
       }));
     }
+
   };
 };

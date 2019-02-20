@@ -15,12 +15,12 @@ module.exports = ({
 
     beforeExecute(p) {
       parse.queryArgs(p, {
-        $select: ['_id', 'enabled', 'name', 'slug', 'sort_value', 'utc_offset']
+        $select: ['_id', 'begins_at', 'enabled', 'ends_before', 'title']
       });
     },
 
     execute(p) {
-      return conns.web.app.service('/dashboards').find({
+      return conns.web.app.service('/annotations').find({
         query: p.query
       }).then(res => file.saveJson(res, p, {
         save: p.file
@@ -36,27 +36,15 @@ module.exports = ({
         name: 'enabled',
         size: 5
       }, {
-        alias: 'sort',
-        name: 'sort_value',
-        opts: {
-          alignment: 'right'
-        },
-        size: 6
+        name: 'begins_at',
+        size: 24
       }, {
-        alias: 'offset',
-        name: 'utc_offset',
-        opts: {
-          alignment: 'right'
-        },
-        size: 6
-      }, {
-        mode: 'fill',
-        name: 'slug',
+        name: 'ends_before',
         size: 24
       }, {
         mode: 'fill',
-        name: 'name',
-        size: 24
+        name: 'title',
+        size: 36
       }], p);
     }
 

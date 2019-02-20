@@ -1,6 +1,10 @@
-'use strict';
+"use strict";
 
-module.exports = ({ check, file, projectSettings }) => {
+module.exports = ({
+  check,
+  file,
+  projectSettings
+}) => {
   return {
     check(p) {
       check.assert.assigned(projectSettings.content, 'No den.json file');
@@ -13,5 +17,6 @@ module.exports = ({ check, file, projectSettings }) => {
         save: p.file
       }));
     }
+
   };
 };

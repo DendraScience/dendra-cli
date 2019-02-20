@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * CLI validation functions.
@@ -7,7 +7,6 @@
  * @license BSD-2-Clause-FreeBSD
  * @module lib/valid
  */
-
 const check = require('check-types');
 
 function objectId(p, field = 'id') {

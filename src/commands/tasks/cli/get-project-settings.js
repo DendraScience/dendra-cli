@@ -1,4 +1,4 @@
-module.exports = ({check, file, projectSettings}) => {
+module.exports = ({ check, file, projectSettings }) => {
   return {
     check (p) {
       check.assert.assigned(projectSettings.content, 'No den.json file')

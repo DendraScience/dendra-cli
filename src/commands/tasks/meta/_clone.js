@@ -6,12 +6,12 @@
  * @module meta/_clone
  */
 
-async function cloneOne ({conns, file}, {id, output, override, p, resource, servicePath}, cb) {
+async function cloneOne ({ conns, file }, { id, output, override, p, resource, servicePath }, cb) {
   let res = await conns.web.app.service(servicePath).get(id)
   if (cb) res = cb(res)
   res = await conns.web.app.service(servicePath).create(res)
 
-  if (p.verbose) output.push([{text: 'Created', tail: ':', bold: true}, {text: resource, bold: true}, {text: res._id, bold: true}])
+  if (p.verbose) output.push([{ text: 'Created', tail: ':', bold: true }, { text: resource, bold: true }, { text: res._id, bold: true }])
 
   const out = await file.saveJson(res, p, {
     file: `${res._id}.${resource}.json`,
@@ -24,18 +24,18 @@ async function cloneOne ({conns, file}, {id, output, override, p, resource, serv
 
 exports.cloneOne = cloneOne
 
-async function cloneMany (ctx, {output, p, query, resource, servicePath}, cb) {
-  const {conns} = ctx
+async function cloneMany (ctx, { output, p, query, resource, servicePath }, cb) {
+  const { conns } = ctx
   const $limit = 10
   const $select = ['_id']
   let $skip = 0
 
   while (true) {
-    const findRes = await conns.web.app.service(servicePath).find({query: Object.assign({}, query, {
+    const findRes = await conns.web.app.service(servicePath).find({ query: Object.assign({}, query, {
       $limit,
       $select,
       $skip
-    })})
+    }) })
 
     if (!(findRes && findRes.data.length)) break
 
@@ -52,7 +52,7 @@ async function cloneMany (ctx, {output, p, query, resource, servicePath}, cb) {
           servicePath
         }, cb)
       } catch (err) {
-        output.push([{text: 'Error', tail: ':'}, {text: resource}, {text: err.message}])
+        output.push([{ text: 'Error', tail: ':' }, { text: resource }, { text: err.message }])
       }
     }
 

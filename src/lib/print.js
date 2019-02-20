@@ -8,7 +8,7 @@
 
 const chalk = require('chalk')
 const jsome = require('jsome')
-const {FeathersError} = require('@feathersjs/errors')
+const { FeathersError } = require('@feathersjs/errors')
 
 function print (obj, p) {
   if (obj instanceof FeathersError) {
@@ -23,8 +23,8 @@ function print (obj, p) {
           The element is an inner array of spans to print. Each span can be a string or object.
          */
         el.forEach((span, i) => {
-          if (typeof span === 'number') span = {text: `${span}`}
-          else if (typeof span === 'string') span = {text: span}
+          if (typeof span === 'number') span = { text: `${span}` }
+          else if (typeof span === 'string') span = { text: span }
 
           const isLast = (i === el.length - 1)
           const tail = span.tail || ''

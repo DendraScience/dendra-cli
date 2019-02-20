@@ -1,6 +1,12 @@
 "use strict";
 
-module.exports = ({ conns, file }, { resource, servicePath }) => {
+module.exports = ({
+  conns,
+  file
+}, {
+  resource,
+  servicePath
+}) => {
   return {
     pre(p) {
       return Object.assign({
@@ -18,5 +24,6 @@ module.exports = ({ conns, file }, { resource, servicePath }) => {
         file: `${res._id}.${resource}.json`
       }));
     }
+
   };
 };

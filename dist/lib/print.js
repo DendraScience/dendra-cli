@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * CLI output printing.
@@ -7,10 +7,13 @@
  * @license BSD-2-Clause-FreeBSD
  * @module lib/print
  */
-
 const chalk = require('chalk');
+
 const jsome = require('jsome');
-const { FeathersError } = require('@feathersjs/errors');
+
+const {
+  FeathersError
+} = require('@feathersjs/errors');
 
 function print(obj, p) {
   if (obj instanceof FeathersError) {
@@ -25,12 +28,14 @@ function print(obj, p) {
           The element is an inner array of spans to print. Each span can be a string or object.
          */
         el.forEach((span, i) => {
-          if (typeof span === 'number') span = { text: `${span}` };else if (typeof span === 'string') span = { text: span };
-
+          if (typeof span === 'number') span = {
+            text: `${span}`
+          };else if (typeof span === 'string') span = {
+            text: span
+          };
           const isLast = i === el.length - 1;
           const tail = span.tail || '';
           const width = typeof span.width === 'number' ? span.width : 14;
-
           let out = `${span.text}`;
 
           if (!isLast && width) {
@@ -50,7 +55,6 @@ function print(obj, p) {
           if (span.bold) out = chalk.bold(out);
           if (span.fg) out = chalk.keyword(span.fg)(out);
           if (span.bg) out = chalk.bgKeyword(span.bg)(out);
-
           if (isLast) console.log(out);else process.stdout.write(out + ' ');
         });
       } else if (typeof el === 'object') {
@@ -73,7 +77,6 @@ function print(obj, p) {
     } else if (p.output === 'indent' || p.output === 'raw') {
       const indent = p.output === 'indent' ? 2 : 0;
       const str = JSON.stringify(obj, null, indent);
-
       if (p.n) process.stdout.write(str);else console.log(str);
     } else {
       throw new Error(`Output not supported: ${p.output}`);

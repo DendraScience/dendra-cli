@@ -1,4 +1,4 @@
-const {join} = require('path')
+const { join } = require('path')
 const Settings = require('../lib/Settings')
 
 module.exports = async (app) => {

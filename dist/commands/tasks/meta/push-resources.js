@@ -1,10 +1,24 @@
-'use strict';
+"use strict";
 
 const ProgressBar = require('progress');
-const { promisify } = require('util');
+
+const {
+  promisify
+} = require('util');
+
 const glob = promisify(require('glob'));
 
-module.exports = ({ conns, file, style, utils, valid }, { resource, servicePath, title }) => {
+module.exports = ({
+  conns,
+  file,
+  style,
+  utils,
+  valid
+}, {
+  resource,
+  servicePath,
+  title
+}) => {
   return {
     check(p) {
       if (!p._sliced.length) valid.string(p, 'filespec');
@@ -17,9 +31,7 @@ module.exports = ({ conns, file, style, utils, valid }, { resource, servicePath,
       });
       const suffix = `.${resource}.json`;
       const output = [];
-
       if (!(files && files.length)) output.push('No files found');
-
       const bar = new ProgressBar(`Uploading ${title.toLowerCase()} [:bar] :current/:total`, {
         complete: '=',
         incomplete: ' ',
@@ -33,11 +45,10 @@ module.exports = ({ conns, file, style, utils, valid }, { resource, servicePath,
         let skip;
         let data;
         let res;
-
-        bar.tick({ fn });
-
+        bar.tick({
+          fn
+        });
         await utils.sleep();
-
         if (!(p.any_suffix || fn.endsWith(suffix))) skip = true;
 
         if (!skip) {
@@ -50,6 +61,7 @@ module.exports = ({ conns, file, style, utils, valid }, { resource, servicePath,
               bar.terminate();
               throw e;
             }
+
             skip = true;
           }
         }
@@ -61,10 +73,16 @@ module.exports = ({ conns, file, style, utils, valid }, { resource, servicePath,
               skip = true;
             } else if (p.dry_run) {
               res = await conns.web.app.service(servicePath).get(data._id);
-              output.push([{ text: 'Will update', tail: ':' }, fn]);
+              output.push([{
+                text: 'Will update',
+                tail: ':'
+              }, fn]);
             } else {
               res = await conns.web.app.service(servicePath).update(data._id, data);
-              if (p.verbose) output.push([{ text: 'Updated', tail: ':' }, fn]);
+              if (p.verbose) output.push([{
+                text: 'Updated',
+                tail: ':'
+              }, fn]);
             }
           } catch (e) {
             if (e.code !== 404) {
@@ -79,16 +97,33 @@ module.exports = ({ conns, file, style, utils, valid }, { resource, servicePath,
             skip = true;
           } else if (p.dry_run) {
             res = data;
-            output.push([{ text: 'Will create', tail: ':', bold: true }, { text: fn, bold: true }]);
+            output.push([{
+              text: 'Will create',
+              tail: ':',
+              bold: true
+            }, {
+              text: fn,
+              bold: true
+            }]);
           } else {
             res = await conns.web.app.service(servicePath).create(data);
-            if (p.verbose) output.push([{ text: 'Created', tail: ':', bold: true }, { text: fn, bold: true }]);
+            if (p.verbose) output.push([{
+              text: 'Created',
+              tail: ':',
+              bold: true
+            }, {
+              text: fn,
+              bold: true
+            }]);
           }
         }
 
         if (!skip && res && p.save) {
           if (p.dry_run) {
-            output.push([{ text: 'Will save', tail: ':' }, fn]);
+            output.push([{
+              text: 'Will save',
+              tail: ':'
+            }, fn]);
           } else {
             const out = await file.saveJson(res, p, null, {
               file: fn
@@ -98,14 +133,28 @@ module.exports = ({ conns, file, style, utils, valid }, { resource, servicePath,
         }
 
         if (skip) {
-          if (p.dry_run) output.push([{ text: 'Will skip', tail: ':', dim: true }, { text: fn, dim: true }]);else if (p.verbose) output.push([{ text: 'Skipped', tail: ':', dim: true }, { text: fn, dim: true }]);
+          if (p.dry_run) output.push([{
+            text: 'Will skip',
+            tail: ':',
+            dim: true
+          }, {
+            text: fn,
+            dim: true
+          }]);else if (p.verbose) output.push([{
+            text: 'Skipped',
+            tail: ':',
+            dim: true
+          }, {
+            text: fn,
+            dim: true
+          }]);
         }
       }
 
       output.push(style.EMPTY);
       output.push('Done!');
-
       return output;
     }
+
   };
 };

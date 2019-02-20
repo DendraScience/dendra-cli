@@ -30,14 +30,14 @@ class Settings {
    */
   init (initialContent) {
     return this.load().then(() => {
-      return {exists: true}
+      return { exists: true }
     }).catch(err => {
       if (err.code !== 'ENOENT') throw err
-      if (!initialContent) return {exists: false}
+      if (!initialContent) return { exists: false }
 
       this.content = initialContent
 
-      return this.save().then(() => ({created: true}))
+      return this.save().then(() => ({ created: true }))
     })
   }
 

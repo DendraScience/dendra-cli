@@ -1,4 +1,4 @@
-module.exports = ({file, userSettings}) => {
+module.exports = ({ file, userSettings }) => {
   return {
     execute (p) {
       return Promise.resolve(userSettings.safeContent)

@@ -1,6 +1,11 @@
-'use strict';
+"use strict";
 
-module.exports = ({ conns, file, parse, style }) => {
+module.exports = ({
+  conns,
+  file,
+  parse,
+  style
+}) => {
   return {
     pre(p) {
       return Object.assign({
@@ -15,7 +20,9 @@ module.exports = ({ conns, file, parse, style }) => {
     },
 
     execute(p) {
-      return conns.web.app.service('/persons').find({ query: p.query }).then(res => file.saveJson(res, p, {
+      return conns.web.app.service('/persons').find({
+        query: p.query
+      }).then(res => file.saveJson(res, p, {
         save: p.file
       }));
     },
@@ -38,5 +45,6 @@ module.exports = ({ conns, file, parse, style }) => {
         size: 24
       }], p);
     }
+
   };
 };

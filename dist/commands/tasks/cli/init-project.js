@@ -1,6 +1,8 @@
-'use strict';
+"use strict";
 
-module.exports = ({ projectSettings }) => {
+module.exports = ({
+  projectSettings
+}) => {
   return {
     execute() {
       return projectSettings.init({
@@ -12,5 +14,6 @@ module.exports = ({ projectSettings }) => {
       if (res.created) return `Created: ${projectSettings.filePath}`;
       if (res.exists) return `File exists: ${projectSettings.filePath}`;
     }
+
   };
 };

@@ -1,12 +1,19 @@
-'use strict';
+"use strict";
 
 const inquirer = require('inquirer');
+
 const ora = require('ora');
-const { removeOne, removeMany } = require('./_remove');
+
+const {
+  removeOne,
+  removeMany
+} = require('./_remove');
 
 module.exports = ctx => {
-  const { style, valid } = ctx;
-
+  const {
+    style,
+    valid
+  } = ctx;
   return {
     pre(p) {
       return Object.assign({
@@ -30,7 +37,6 @@ module.exports = ctx => {
           message: `Remove station ${p.id}`,
           name: 'confirm'
         }]);
-
         confirm = answers.confirm;
       }
 
@@ -41,12 +47,10 @@ module.exports = ctx => {
           message: 'Remove associated datastreams',
           name: 'confirm'
         }]);
-
         confirmDeep = answers.confirm;
       }
 
       const output = [];
-
       let count = 0;
       let spinner;
       let station;
@@ -57,7 +61,6 @@ module.exports = ctx => {
           stream: process.stdout,
           text: 'Removing...'
         }).start();
-
         await removeMany(ctx, {
           output,
           p,
@@ -87,14 +90,13 @@ module.exports = ctx => {
 
       if (spinner) {
         spinner.succeed(`Removed ${count} resources(s)`);
-
         output.push(style.EMPTY);
         output.push('Done!');
-
         return output;
       }
 
       return station;
     }
+
   };
 };

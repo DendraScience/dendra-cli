@@ -1,14 +1,24 @@
-'use strict';
+"use strict";
 
 const chalk = require('chalk');
+
 const check = require('check-types');
+
 const file = require('../lib/file');
+
 const parse = require('../lib/parse');
+
 const style = require('../lib/style');
+
 const tasks = require('./tasks');
+
 const utils = require('../lib/utils');
+
 const valid = require('../lib/valid');
-const { TaskCommand } = require('@dendra-science/task-command');
+
+const {
+  TaskCommand
+} = require('@dendra-science/task-command');
 
 module.exports = function (app) {
   // Decorate app with the command processor

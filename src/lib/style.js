@@ -7,9 +7,10 @@
  */
 
 const chalk = require('chalk')
+const packageJson = require('../../package.json')
 const stringLength = require('string-length')
-const {getBorderCharacters, table} = require('table')
-const {getByDot} = require('./utils')
+const { getBorderCharacters, table } = require('table')
+const { getByDot } = require('./utils')
 
 const EMPTY = ''
 
@@ -78,7 +79,7 @@ function commandHelp (config, p) {
   const output = [
     EMPTY,
     ' _| _ _  _| _ _ ',
-    '(_|(-| )(_|| (_| CLI 1.0',
+    `(_|(-| )(_|| (_| CLI ${packageJson.version}`,
     EMPTY
   ]
   const ttyWidth = process.stdout.columns
@@ -141,7 +142,7 @@ function dataTable (res, cols, p) {
   let totalWidth = cols.reduce((total, col) => total + col.size + 1, 0)
 
   if (p.verbose && p.query) {
-    output.push({query: p.query})
+    output.push({ query: p.query })
     output.push(EMPTY)
   }
 
@@ -178,13 +179,13 @@ function dataTable (res, cols, p) {
       return false
     },
     columns: cols.map(col => {
-      if (col.size > 1) return Object.assign({width: col.size}, col.opts)
+      if (col.size > 1) return Object.assign({ width: col.size }, col.opts)
       return col.opts
     })
   }
 
   output.push(table(tableData, tableConfig))
-  output.push([{text: 'Items', tail: ':'}, res.data.length])
+  output.push([{ text: 'Items', tail: ':' }, res.data.length])
 
   return output
 }

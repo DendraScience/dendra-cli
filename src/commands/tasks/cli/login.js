@@ -1,6 +1,6 @@
 const inquirer = require('inquirer')
 
-module.exports = ({check, conns, mergedSettings, userSettings, utils}) => {
+module.exports = ({ check, conns, mergedSettings, userSettings, utils }) => {
   return {
     pre (p) {
       return Object.assign({

@@ -28,14 +28,14 @@ function saveJson (data, p, defaults, override) {
 
   if (opts.save && opts.file) {
     let writeOpts
-    if (!p.output || (p.output === 'indent')) writeOpts = {indent: 2}
-    else if (p.output === 'raw') writeOpts = {indent: null}
+    if (!p.output || (p.output === 'indent')) writeOpts = { indent: 2 }
+    else if (p.output === 'raw') writeOpts = { indent: null }
     else return Promise.reject(new Error(`Output not supported: ${p.output}`))
 
     const fp = path.resolve(process.cwd(), opts.file)
     return writeJsonFile(fp, data, writeOpts).then(() => {
       return [
-        [{text: 'Saved', tail: ':'}, opts.file]
+        [{ text: 'Saved', tail: ':' }, opts.file]
       ]
     })
   } else if (opts.save && !opts.file) {

@@ -1,5 +1,5 @@
-const {homedir} = require('os')
-const {join} = require('path')
+const { homedir } = require('os')
+const { join } = require('path')
 const Settings = require('../lib/Settings')
 
 module.exports = async (app) => {

@@ -1,7 +1,7 @@
 const path = require('path')
 const ProgressBar = require('progress')
 
-module.exports = ({conns, file, parse, style, utils}, {resource, servicePath, title}) => {
+module.exports = ({ conns, file, parse, style, utils }, { resource, servicePath, title }) => {
   return {
     pre (p) {
       return Object.assign({
@@ -18,12 +18,12 @@ module.exports = ({conns, file, parse, style, utils}, {resource, servicePath, ti
     },
 
     async execute (p) {
-      const findRes = await conns.web.app.service(servicePath).find({query: p.query})
+      const findRes = await conns.web.app.service(servicePath).find({ query: p.query })
       const suffix = `.${resource}.json`
       const output = []
 
       if (p.verbose && p.query) {
-        output.push({query: p.query})
+        output.push({ query: p.query })
         output.push(style.EMPTY)
       }
 
@@ -42,14 +42,14 @@ module.exports = ({conns, file, parse, style, utils}, {resource, servicePath, ti
       for (let item of findRes.data) {
         const fn = path.join(p.dir || '', `${item._id}${suffix}`)
 
-        bar.tick({fn})
+        bar.tick({ fn })
 
         await utils.sleep()
 
         const res = await conns.web.app.service(servicePath).get(item._id)
 
         if (p.dry_run) {
-          output.push([{text: 'Will save', tail: ':'}, fn])
+          output.push([{ text: 'Will save', tail: ':' }, fn])
         } else {
           const out = await file.saveJson(res, p, null, {
             file: fn,

@@ -1,9 +1,9 @@
 const inquirer = require('inquirer')
 const ora = require('ora')
-const {removeOne, removeMany} = require('./_remove')
+const { removeOne, removeMany } = require('./_remove')
 
 module.exports = (ctx) => {
-  const {style, valid} = ctx
+  const { style, valid } = ctx
 
   return {
     pre (p) {

@@ -1,8 +1,8 @@
 const inquirer = require('inquirer')
-const {removeOne} = require('./_remove')
+const { removeOne } = require('./_remove')
 
-module.exports = (ctx, {resource, servicePath}) => {
-  const {valid} = ctx
+module.exports = (ctx, { resource, servicePath }) => {
+  const { valid } = ctx
 
   return {
     pre (p) {
