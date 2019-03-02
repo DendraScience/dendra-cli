@@ -29,7 +29,9 @@ const COMMANDS = [{
   title: 'Annotations'
 }, {
   prop: 'remove-annotation',
-  req: 'remove-resource-objectId'
+  req: 'remove-resource-objectId',
+  resource: 'annotation',
+  servicePath: '/annotations'
 }, {
   prop: 'update-annotation',
   req: 'update-resource',

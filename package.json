@@ -1,6 +1,6 @@
 {
   "name": "@dendra-science/dendra-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Dendra command line interface tool.",
   "license": "BSD-2-Clause-FreeBSD",
   "author": "J. Scott Smith <scott@newleafsolutionsinc.com>",
@@ -60,10 +60,10 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "chai": "^4.2.0",
-    "eslint": "^5.13.0",
+    "eslint": "^5.15.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "^8.0.1",

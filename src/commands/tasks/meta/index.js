@@ -6,7 +6,7 @@ const COMMANDS = [
   { prop: 'list-annotations', req: 'list-annotations' },
   { prop: 'pull-annotations', req: 'pull-resources', resource: 'annotation', servicePath: '/annotations', title: 'Annotations' },
   { prop: 'push-annotations', req: 'push-resources', resource: 'annotation', servicePath: '/annotations', title: 'Annotations' },
-  { prop: 'remove-annotation', req: 'remove-resource-objectId' },
+  { prop: 'remove-annotation', req: 'remove-resource-objectId', resource: 'annotation', servicePath: '/annotations' },
   { prop: 'update-annotation', req: 'update-resource', resource: 'annotation', servicePath: '/annotations' },
 
   { prop: 'clone-dashboard', req: 'clone-dashboard' },
