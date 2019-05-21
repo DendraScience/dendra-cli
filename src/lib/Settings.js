@@ -10,15 +10,17 @@ const WRITE_OPTIONS = {
  * Manager to load and save settings in a JSON file.
  */
 class Settings {
-  constructor (filePath, options) {
-    [this.content, this.filePath, this.options] = [null, filePath, options]
+  constructor(filePath, options) {
+    ;[this.content, this.filePath, this.options] = [null, filePath, options]
   }
 
-  get safeContent () {
+  get safeContent() {
     const content = Object.assign({}, this.content)
     const opts = this.options
 
-    opts && opts.privateFields && opts.privateFields.forEach(fld => delete content[fld])
+    opts &&
+      opts.privateFields &&
+      opts.privateFields.forEach(fld => delete content[fld])
 
     return content
   }
@@ -28,24 +30,26 @@ class Settings {
   /**
    * Load and optionally create a settings file.
    */
-  init (initialContent) {
-    return this.load().then(() => {
-      return { exists: true }
-    }).catch(err => {
-      if (err.code !== 'ENOENT') throw err
-      if (!initialContent) return { exists: false }
+  init(initialContent) {
+    return this.load()
+      .then(() => {
+        return { exists: true }
+      })
+      .catch(err => {
+        if (err.code !== 'ENOENT') throw err
+        if (!initialContent) return { exists: false }
 
-      this.content = initialContent
+        this.content = initialContent
 
-      return this.save().then(() => ({ created: true }))
-    })
+        return this.save().then(() => ({ created: true }))
+      })
   }
 
-  load () {
+  load() {
     return loadJsonFile(this.filePath).then(json => (this.content = json))
   }
 
-  save () {
+  save() {
     return writeJsonFile(this.filePath, this.content, WRITE_OPTIONS)
   }
 }

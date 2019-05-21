@@ -1,46 +1,57 @@
 module.exports = ({ conns, file, parse, style }) => {
   return {
-    pre (p) {
-      return Object.assign({
-        query: p._sliced[0]
-      }, p)
+    pre(p) {
+      return Object.assign(
+        {
+          query: p._sliced[0]
+        },
+        p
+      )
     },
 
-    beforeExecute (p) {
+    beforeExecute(p) {
       parse.queryArgs(p, {
-        $select: [
-          '_id',
-          'email',
-          'full_name',
-          'name'
-        ]
+        $select: ['_id', 'email', 'full_name', 'name']
       })
     },
 
-    execute (p) {
-      return conns.web.app.service('/persons').find({ query: p.query })
-        .then(res => file.saveJson(res, p, {
-          save: p.file
-        }))
+    execute(p) {
+      return conns.web.app
+        .service('/persons')
+        .find({ query: p.query })
+        .then(res =>
+          file.saveJson(res, p, {
+            save: p.file
+          })
+        )
     },
 
-    format (p, res) {
-      return style.dataTable(res, [{
-        name: '_id',
-        size: 24
-      }, {
-        mode: 'fill',
-        name: 'email',
-        size: 24
-      }, {
-        mode: 'fill',
-        name: 'name',
-        size: 24
-      }, {
-        mode: 'fill',
-        name: 'full_name',
-        size: 24
-      }], p)
+    format(p, res) {
+      return style.dataTable(
+        res,
+        [
+          {
+            name: '_id',
+            size: 24
+          },
+          {
+            mode: 'fill',
+            name: 'email',
+            size: 24
+          },
+          {
+            mode: 'fill',
+            name: 'name',
+            size: 24
+          },
+          {
+            mode: 'fill',
+            name: 'full_name',
+            size: 24
+          }
+        ],
+        p
+      )
     }
   }
 }

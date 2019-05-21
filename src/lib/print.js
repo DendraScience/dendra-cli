@@ -10,7 +10,7 @@ const chalk = require('chalk')
 const jsome = require('jsome')
 const { FeathersError } = require('@feathersjs/errors')
 
-function print (obj, p) {
+function print(obj, p) {
   if (obj instanceof FeathersError) {
     console.log(chalk`{inverse  ERR! } ${obj.message}`)
     console.log(jsome.getColoredString(obj.toJSON()))
@@ -26,7 +26,7 @@ function print (obj, p) {
           if (typeof span === 'number') span = { text: `${span}` }
           else if (typeof span === 'string') span = { text: span }
 
-          const isLast = (i === el.length - 1)
+          const isLast = i === el.length - 1
           const tail = span.tail || ''
           const width = typeof span.width === 'number' ? span.width : 14
 
@@ -68,10 +68,10 @@ function print (obj, p) {
   } else if (typeof obj === 'string') {
     console.log(obj)
   } else if (typeof obj === 'object') {
-    if (!p.output || (p.output === 'color')) {
+    if (!p.output || p.output === 'color') {
       console.log(jsome.getColoredString(obj))
-    } else if ((p.output === 'indent') || (p.output === 'raw')) {
-      const indent = (p.output === 'indent') ? 2 : 0
+    } else if (p.output === 'indent' || p.output === 'raw') {
+      const indent = p.output === 'indent' ? 2 : 0
       const str = JSON.stringify(obj, null, indent)
 
       if (p.n) process.stdout.write(str)

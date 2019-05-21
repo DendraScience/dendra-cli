@@ -15,7 +15,7 @@ module.exports = ({
 
     beforeExecute(p) {
       parse.queryArgs(p, {
-        $select: ['_id', 'enabled', 'name', 'slug', 'station_type', 'status', 'utc_offset']
+        $select: ['_id', 'enabled', 'is_enabled', 'name', 'slug', 'station_type', 'status', 'utc_offset']
       });
     },
 
@@ -33,7 +33,7 @@ module.exports = ({
         size: 24
       }, {
         alias: 'enab?',
-        name: 'enabled',
+        names: ['enabled', 'is_enabled'],
         size: 5
       }, {
         alias: 'type',

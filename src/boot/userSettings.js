@@ -2,11 +2,9 @@ const { homedir } = require('os')
 const { join } = require('path')
 const Settings = require('../lib/Settings')
 
-module.exports = async (app) => {
+module.exports = async app => {
   const userSettings = new Settings(join(homedir(), '.den', 'settings.json'), {
-    privateFields: [
-      'tokens'
-    ]
+    privateFields: ['tokens']
   })
 
   await userSettings.init({

@@ -8,14 +8,14 @@
 
 const check = require('check-types')
 
-function objectId (p, field = 'id') {
+function objectId(p, field = 'id') {
   // TODO: Add regex test
   check.assert.nonEmptyString(p[field], `Required: ${field}`)
 }
 
 exports.objectId = objectId
 
-function string (p, field) {
+function string(p, field) {
   check.assert.nonEmptyString(p[field], `Required: ${field}`)
 }
 

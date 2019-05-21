@@ -42,7 +42,7 @@ module.exports = ctx => {
         count++;
         spinner.text = `Cloning station: ${res._id}`;
         delete res._id;
-        res.enabled = false;
+        if (res.is_enabled) res.is_enabled = false;else if (res.enabled) res.enabled = false;
         res.name = `${res.name} (Clone)`;
         if (res.full_name) res.full_name = `${res.full_name} (Clone)`;
         if (res.slug) res.slug = `${res.slug}-clone`;

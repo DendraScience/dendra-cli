@@ -2,14 +2,17 @@ const inquirer = require('inquirer')
 
 module.exports = ({ check, conns, mergedSettings, userSettings, utils }) => {
   return {
-    pre (p) {
-      return Object.assign({
-        email: p._sliced[0],
-        password: p._sliced[1]
-      }, p)
+    pre(p) {
+      return Object.assign(
+        {
+          email: p._sliced[0],
+          password: p._sliced[1]
+        },
+        p
+      )
     },
 
-    async execute (p) {
+    async execute(p) {
       const questions = []
 
       if (!p.email) {
@@ -17,7 +20,7 @@ module.exports = ({ check, conns, mergedSettings, userSettings, utils }) => {
           type: 'input',
           message: 'Enter email',
           name: 'email',
-          validate (value) {
+          validate(value) {
             return check.nonEmptyString(value) || 'Required'
           }
         })
@@ -28,7 +31,7 @@ module.exports = ({ check, conns, mergedSettings, userSettings, utils }) => {
           type: 'password',
           message: 'Enter password',
           name: 'password',
-          validate (value) {
+          validate(value) {
             return check.nonEmptyString(value) || 'Required'
           }
         })
@@ -41,18 +44,26 @@ module.exports = ({ check, conns, mergedSettings, userSettings, utils }) => {
         password: merged.password,
         strategy: 'local'
       })
-      const payload = await conns.web.app.passport.verifyJWT(authRes.accessToken)
+      const payload = await conns.web.app.passport.verifyJWT(
+        authRes.accessToken
+      )
       const userRes = await conns.web.app.service('/users').get(payload.userId)
 
       // Save access token to user settings
-      utils.setByDot(userSettings.content, `tokens.${conns.web.storageKey}`, authRes.accessToken)
+      utils.setByDot(
+        userSettings.content,
+        `tokens.${conns.web.storageKey}`,
+        authRes.accessToken
+      )
       await userSettings.save()
 
       return userRes
     },
 
-    format (p, res) {
-      return `Hello ${res.name}, you are logged in to: ${mergedSettings.content.environment}`
+    format(p, res) {
+      return `Hello ${res.name}, you are logged in to: ${
+        mergedSettings.content.environment
+      }`
     }
   }
 }

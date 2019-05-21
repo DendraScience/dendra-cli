@@ -16,11 +16,11 @@ const EMPTY = ''
 
 exports.EMPTY = EMPTY
 
-function placeholder (obj) {
-  return (typeof obj === 'undefined') || (obj === null) ? '..' : obj
+function placeholder(obj) {
+  return typeof obj === 'undefined' || obj === null ? '..' : obj
 }
 
-function processGroup (group, maxWidth, p, output, cb) {
+function processGroup(group, maxWidth, p, output, cb) {
   if (!(group.items && group.items.length)) return
 
   const visItems = group.items.filter(item => !item.vis || p.all)
@@ -55,7 +55,7 @@ function processGroup (group, maxWidth, p, output, cb) {
     columnDefault: {
       paddingRight: 0
     },
-    drawHorizontalLine () {
+    drawHorizontalLine() {
       return false
     },
     columns: {
@@ -75,7 +75,7 @@ function processGroup (group, maxWidth, p, output, cb) {
   return numItems
 }
 
-function commandHelp (config, p) {
+function commandHelp(config, p) {
   const output = [
     EMPTY,
     ' _| _ _  _| _ _ ',
@@ -108,22 +108,29 @@ function commandHelp (config, p) {
 
   if (config.groups && config.groups.length) {
     config.groups.forEach(group => {
-      const numItems = processGroup(group, maxWidth, p, output, (item, parts) => {
-        return [
-          parts.length ? parts.join(' ') : ' ',
-          item.desc
-        ]
-      })
+      const numItems = processGroup(
+        group,
+        maxWidth,
+        p,
+        output,
+        (item, parts) => {
+          return [parts.length ? parts.join(' ') : ' ', item.desc]
+        }
+      )
 
       if (group.items.length > numItems) showingCommon = true
     })
   }
 
   if (p.all) {
-    output.push('Showing all commands. To see only commonly used commands, remove the `--all` option.')
+    output.push(
+      'Showing all commands. To see only commonly used commands, remove the `--all` option.'
+    )
     output.push(EMPTY)
   } else if (showingCommon) {
-    output.push('Showing only commonly used commands. To see all commands, add the `--all` option.')
+    output.push(
+      'Showing only commonly used commands. To see all commands, add the `--all` option.'
+    )
     output.push(EMPTY)
   }
 
@@ -132,10 +139,10 @@ function commandHelp (config, p) {
 
 exports.commandHelp = commandHelp
 
-function dataTable (res, cols, p) {
-  if ((typeof res !== 'object') || Array.isArray(res)) return res
+function dataTable(res, cols, p) {
+  if (typeof res !== 'object' || Array.isArray(res)) return res
   if (!Array.isArray(res.data)) return res
-  if (p.output && (p.output !== 'table')) return res
+  if (p.output && p.output !== 'table') return res
 
   const output = []
   const ttyWidth = process.stdout.columns
@@ -147,7 +154,7 @@ function dataTable (res, cols, p) {
   }
 
   // Remove intermediate columns that don't fit
-  while ((cols.length > 1) && (totalWidth > ttyWidth)) {
+  while (cols.length > 1 && totalWidth > ttyWidth) {
     const first = cols.shift()
     totalWidth -= cols.shift().size + 1
     cols.unshift(first)
@@ -155,7 +162,17 @@ function dataTable (res, cols, p) {
 
   // Map row object properties to column array
   const tableData = res.data.map(rowObj => {
-    return cols.map(col => placeholder(getByDot(rowObj, col.name)))
+    return cols.map(col => {
+      const value = (col.names || [col.name]).reduce((val, name) => {
+        if (val === null) {
+          const colVal = getByDot(rowObj, name)
+          if (colVal !== undefined) return colVal
+        }
+        return val
+      }, null)
+
+      return placeholder(value)
+    })
   })
 
   // Prepend header row
@@ -164,7 +181,7 @@ function dataTable (res, cols, p) {
   // Distribute any remaining space over all fill columns
   const fillCols = cols.filter(col => col.mode === 'fill')
   const remSpace = ttyWidth - totalWidth
-  if (fillCols.length && (remSpace > 0)) {
+  if (fillCols.length && remSpace > 0) {
     const addSize = Math.floor(remSpace / fillCols.length)
     fillCols.forEach(col => (col.size += addSize))
   }
@@ -175,7 +192,7 @@ function dataTable (res, cols, p) {
       paddingLeft: 0,
       paddingRight: 1
     },
-    drawHorizontalLine () {
+    drawHorizontalLine() {
       return false
     },
     columns: cols.map(col => {

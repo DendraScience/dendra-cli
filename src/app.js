@@ -14,7 +14,7 @@ const boot = require('./boot')
 const connections = require('./connections')
 const commands = require('./commands')
 
-module.exports = async (log) => {
+module.exports = async log => {
   const app = feathers()
 
   app.logger = log

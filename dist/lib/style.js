@@ -145,7 +145,17 @@ function dataTable(res, cols, p) {
 
 
   const tableData = res.data.map(rowObj => {
-    return cols.map(col => placeholder(getByDot(rowObj, col.name)));
+    return cols.map(col => {
+      const value = (col.names || [col.name]).reduce((val, name) => {
+        if (val === null) {
+          const colVal = getByDot(rowObj, name);
+          if (colVal !== undefined) return colVal;
+        }
+
+        return val;
+      }, null);
+      return placeholder(value);
+    });
   }); // Prepend header row
 
   tableData.unshift(cols.map(col => chalk.bold(col.alias || col.name))); // Distribute any remaining space over all fill columns

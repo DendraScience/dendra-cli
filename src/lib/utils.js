@@ -10,15 +10,17 @@
  * Adaped from feathers-plus/feathers-hooks-common
  * https://github.com/feathers-plus/feathers-hooks-common/blob/master/lib/common/get-by-dot.js
  */
-function getByDot (obj, path) {
+function getByDot(obj, path) {
   if (path.indexOf('.') === -1) {
     return obj[path]
   }
 
-  return path.split('.').reduce(
-    (obj1, part) => (typeof obj1 === 'object' ? obj1[part] : undefined),
-    obj
-  )
+  return path
+    .split('.')
+    .reduce(
+      (obj1, part) => (typeof obj1 === 'object' ? obj1[part] : undefined),
+      obj
+    )
 }
 
 exports.getByDot = getByDot
@@ -27,7 +29,7 @@ exports.getByDot = getByDot
  * Adapted from feathers-plus/feathers-hooks-common
  * https://github.com/feathers-plus/feathers-hooks-common/blob/master/lib/common/set-by-dot.js
  */
-function setByDot (obj, path, value, ifDelete) {
+function setByDot(obj, path, value, ifDelete) {
   // if (ifDelete) {
   //   console.log('DEPRECATED. Use deleteByDot instead of setByDot(obj,path,value,true). (setByDot)')
   // }
@@ -44,28 +46,25 @@ function setByDot (obj, path, value, ifDelete) {
 
   const parts = path.split('.')
   const lastIndex = parts.length - 1
-  return parts.reduce(
-    (obj1, part, i) => {
-      if (i !== lastIndex) {
-        if (!obj1.hasOwnProperty(part) || typeof obj1[part] !== 'object') {
-          obj1[part] = {}
-        }
-        return obj1[part]
+  return parts.reduce((obj1, part, i) => {
+    if (i !== lastIndex) {
+      if (!obj1.hasOwnProperty(part) || typeof obj1[part] !== 'object') {
+        obj1[part] = {}
       }
+      return obj1[part]
+    }
 
-      obj1[part] = value
-      if (value === undefined && ifDelete) {
-        delete obj1[part]
-      }
-      return obj1
-    },
-    obj
-  )
+    obj1[part] = value
+    if (value === undefined && ifDelete) {
+      delete obj1[part]
+    }
+    return obj1
+  }, obj)
 }
 
 exports.setByDot = setByDot
 
-function sleep (ms = 1, value) {
+function sleep(ms = 1, value) {
   return new Promise(resolve => setTimeout(resolve, ms)).then(() => value)
 }
 

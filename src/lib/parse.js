@@ -30,7 +30,7 @@ const MOMENT_FORMATS = [
 const RESERVED_REGEX = /^(_|_sliced|dir|dry-run|dry_run|file|filespec|limit|output|query|save|sort|sort:asc|sort:desc|verbose)$/
 const BOOL_REGEX = /^(false|true)$/i
 
-function queryArgs (p, tableOpts, override) {
+function queryArgs(p, tableOpts, override) {
   let q = p.query
 
   /*
@@ -95,7 +95,7 @@ function queryArgs (p, tableOpts, override) {
 
 exports.queryArgs = queryArgs
 
-function coerceValue (val) {
+function coerceValue(val) {
   if (typeof val !== 'string') return
 
   // Handle encoded spaces and special characters
@@ -106,7 +106,7 @@ function coerceValue (val) {
    */
 
   // Boolean
-  if (BOOL_REGEX.test(val)) return (val === 'true')
+  if (BOOL_REGEX.test(val)) return val === 'true'
 
   // Date
   const m = moment(val, MOMENT_FORMATS, true)
@@ -120,7 +120,7 @@ function coerceValue (val) {
   return val
 }
 
-function value (p) {
+function value(p) {
   p.value = coerceValue(p.value)
 }
 

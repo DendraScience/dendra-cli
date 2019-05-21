@@ -29,36 +29,32 @@ process.on('unhandledRejection', err => {
   process.exit(1)
 })
 
-require('./app')(log).then(app => {
-  const args = process.argv.slice(2)
-  const parsed = mri(args, {
-    alias: {
-      any_suffix: 'any-suffix',
-      confirm_deep: 'confirm-deep',
-      dry_run: 'dry-run'
-    },
-    default: app.get('mergedSettings').content.default,
-    boolean: [
-      'any_suffix',
-      'confirm',
-      'confirm_deep',
-      'deep',
-      'dry_run',
-      'verbose'
-    ],
-    string: [
-      'dir',
-      'file',
-      'filespec',
-      'id',
-      'output',
-      'value'
-    ]
-  })
+require('./app')(log)
+  .then(app => {
+    const args = process.argv.slice(2)
+    const parsed = mri(args, {
+      alias: {
+        any_suffix: 'any-suffix',
+        confirm_deep: 'confirm-deep',
+        dry_run: 'dry-run'
+      },
+      default: app.get('mergedSettings').content.default,
+      boolean: [
+        'any_suffix',
+        'confirm',
+        'confirm_deep',
+        'deep',
+        'dry_run',
+        'verbose'
+      ],
+      string: ['dir', 'file', 'filespec', 'id', 'output', 'value']
+    })
 
-  return app.command.eval(parsed)
-}).then(state => {
-  print(state.output, state.parsed)
-}).catch(err => {
-  print(err)
-})
+    return app.command.eval(parsed)
+  })
+  .then(state => {
+    print(state.output, state.parsed)
+  })
+  .catch(err => {
+    print(err)
+  })

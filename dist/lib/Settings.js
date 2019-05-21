@@ -15,6 +15,7 @@ const WRITE_OPTIONS = {
 
 class Settings {
   constructor(filePath, options) {
+    ;
     [this.content, this.filePath, this.options] = [null, filePath, options];
   }
 

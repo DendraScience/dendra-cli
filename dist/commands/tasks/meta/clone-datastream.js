@@ -31,7 +31,7 @@ module.exports = ctx => {
         servicePath: '/datastreams'
       }, res => {
         delete res._id;
-        res.enabled = false;
+        if (res.is_enabled) res.is_enabled = false;else if (res.enabled) res.enabled = false;
         res.name = `${res.name} (Clone)`;
         return res;
       });
