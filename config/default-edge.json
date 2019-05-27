@@ -1,7 +1,7 @@
 {
   "connections": {
     "web": {
-      "url": "https://api.dendra.science/v2"
+      "url": "https://api.edge.dendra.science/v2"
     }
   }
 }
