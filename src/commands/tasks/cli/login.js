@@ -61,9 +61,7 @@ module.exports = ({ check, conns, mergedSettings, userSettings, utils }) => {
     },
 
     format(p, res) {
-      return `Hello ${res.name}, you are logged in to: ${
-        mergedSettings.content.environment
-      }`
+      return `Hello ${res.name}, you are logged in to: ${mergedSettings.content.environment}`
     }
   }
 }

@@ -85,13 +85,13 @@ module.exports = ctx => {
           }, {
             cmd: 'system',
             sub: '<sub>',
-            desc: 'Run a system subcommand' // JSS: Not implemented
-            // {},
-            // { cmd: 'version', sub: 'help', desc: 'Show help on version subcommands' },
-            // { cmd: 'version', sub: '<sub>', desc: 'Run a version subcommand' },
-            // { cmd: 'version', desc: 'Show Dendra version info' }
-
-          }]
+            desc: 'Run a system subcommand'
+          } // JSS: Not implemented
+          // {},
+          // { cmd: 'version', sub: 'help', desc: 'Show help on version subcommands' },
+          // { cmd: 'version', sub: '<sub>', desc: 'Run a version subcommand' },
+          // { cmd: 'version', desc: 'Show Dendra version info' }
+          ]
         }]
       }, p);
     },

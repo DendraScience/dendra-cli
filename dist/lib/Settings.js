@@ -7,11 +7,10 @@ const writeJsonFile = require('write-json-file');
 const WRITE_OPTIONS = {
   indent: 2,
   sortKeys: true
-  /**
-   * Manager to load and save settings in a JSON file.
-   */
-
 };
+/**
+ * Manager to load and save settings in a JSON file.
+ */
 
 class Settings {
   constructor(filePath, options) {
