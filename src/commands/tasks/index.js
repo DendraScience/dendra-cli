@@ -1,6 +1,15 @@
 const path = require('path')
 
-const COMMANDS = ['cli', 'init', 'login', 'logout', 'meta', 'system', 'whoami']
+const COMMANDS = [
+  'cli',
+  'init',
+  'login',
+  'logout',
+  'meta',
+  'system',
+  'util',
+  'whoami'
+]
 
 module.exports = ctx => {
   const { style } = ctx
@@ -92,7 +101,23 @@ module.exports = ctx => {
                   sub: 'help',
                   desc: 'Show help on system subcommands'
                 },
-                { cmd: 'system', sub: '<sub>', desc: 'Run a system subcommand' }
+                {
+                  cmd: 'system',
+                  sub: '<sub>',
+                  desc: 'Run a system subcommand'
+                },
+
+                {},
+                {
+                  cmd: 'util',
+                  sub: 'help',
+                  desc: 'Show help on utility subcommands'
+                },
+                {
+                  cmd: 'util',
+                  sub: '<sub>',
+                  desc: 'Run a utility subcommand'
+                }
 
                 // JSS: Not implemented
                 // {},
