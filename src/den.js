@@ -47,7 +47,7 @@ require('./app')(log)
         'dry_run',
         'verbose'
       ],
-      string: ['dir', 'file', 'filespec', 'id', 'output', 'value']
+      string: ['dir', 'file', 'filespec', 'id', 'output', 'params', 'value']
     })
 
     return app.command.eval(parsed)

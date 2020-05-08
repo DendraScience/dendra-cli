@@ -16,6 +16,12 @@ const COMMANDS = [{
   prop: 'list-annotations',
   req: 'list-annotations'
 }, {
+  prop: 'patch-annotations',
+  req: 'patch-resources',
+  resource: 'annotation',
+  servicePath: '/annotations',
+  title: 'Annotations'
+}, {
   prop: 'pull-annotations',
   req: 'pull-resources',
   resource: 'annotation',
@@ -53,6 +59,12 @@ const COMMANDS = [{
 }, {
   prop: 'list-dashboards',
   req: 'list-dashboards'
+}, {
+  prop: 'patch-dashboards',
+  req: 'patch-resources',
+  resource: 'dashboard',
+  servicePath: '/dashboards',
+  title: 'Dashboards'
 }, {
   prop: 'pull-dashboards',
   req: 'pull-dashboards',
@@ -92,6 +104,12 @@ const COMMANDS = [{
   prop: 'list-datastreams',
   req: 'list-datastreams'
 }, {
+  prop: 'patch-datastreams',
+  req: 'patch-resources',
+  resource: 'datastream',
+  servicePath: '/datastreams',
+  title: 'Datastreams'
+}, {
   prop: 'pull-datastreams',
   req: 'pull-resources',
   resource: 'datastream',
@@ -126,6 +144,12 @@ const COMMANDS = [{
 }, {
   prop: 'list-memberships',
   req: 'list-memberships'
+}, {
+  prop: 'patch-memberships',
+  req: 'patch-resources',
+  resource: 'membership',
+  servicePath: '/memberships',
+  title: 'Memberships'
 }, {
   prop: 'pull-memberships',
   req: 'pull-resources',
@@ -162,6 +186,12 @@ const COMMANDS = [{
   prop: 'list-organizations',
   req: 'list-organizations'
 }, {
+  prop: 'patch-organizations',
+  req: 'patch-resources',
+  resource: 'organization',
+  servicePath: '/organizations',
+  title: 'Organizations'
+}, {
   prop: 'pull-organizations',
   req: 'pull-resources',
   resource: 'organization',
@@ -196,6 +226,12 @@ const COMMANDS = [{
 }, {
   prop: 'list-persons',
   req: 'list-persons'
+}, {
+  prop: 'patch-persons',
+  req: 'patch-resources',
+  resource: 'person',
+  servicePath: '/persons',
+  title: 'Persons'
 }, {
   prop: 'pull-persons',
   req: 'pull-resources',
@@ -232,6 +268,12 @@ const COMMANDS = [{
   prop: 'list-places',
   req: 'list-places'
 }, {
+  prop: 'patch-places',
+  req: 'patch-resources',
+  resource: 'place',
+  servicePath: '/places',
+  title: 'Places'
+}, {
   prop: 'pull-places',
   req: 'pull-resources',
   resource: 'place',
@@ -267,6 +309,12 @@ const COMMANDS = [{
   prop: 'list-schemes',
   req: 'list-schemes'
 }, {
+  prop: 'patch-schemes',
+  req: 'patch-resources',
+  resource: 'scheme',
+  servicePath: '/schemes',
+  title: 'Schemes'
+}, {
   prop: 'pull-schemes',
   req: 'pull-resources',
   resource: 'scheme',
@@ -301,6 +349,12 @@ const COMMANDS = [{
 }, {
   prop: 'list-soms',
   req: 'list-soms'
+}, {
+  prop: 'patch-soms',
+  req: 'patch-resources',
+  resource: 'som',
+  servicePath: '/soms',
+  title: 'SOMs'
 }, {
   prop: 'pull-soms',
   req: 'pull-resources',
@@ -339,6 +393,12 @@ const COMMANDS = [{
 }, {
   prop: 'list-stations',
   req: 'list-stations'
+}, {
+  prop: 'patch-stations',
+  req: 'patch-resources',
+  resource: 'station',
+  servicePath: '/stations',
+  title: 'Stations'
 }, {
   prop: 'pull-stations',
   req: 'pull-resources',
@@ -379,6 +439,12 @@ const COMMANDS = [{
   servicePath: '/things',
   title: 'Things'
 }, {
+  prop: 'patch-things',
+  req: 'patch-resources',
+  resource: 'thing',
+  servicePath: '/things',
+  title: 'Things'
+}, {
   prop: 'push-things',
   req: 'push-resources',
   resource: 'thing',
@@ -395,6 +461,47 @@ const COMMANDS = [{
   resource: 'thing',
   servicePath: '/things'
 }, {
+  prop: 'create-thing-type',
+  req: 'create-resource',
+  resource: 'thing-type',
+  servicePath: '/thing-types'
+}, {
+  prop: 'get-thing-type',
+  req: 'get-resource-objectId',
+  resource: 'thing-type',
+  servicePath: '/thing-types'
+}, {
+  prop: 'list-thing-types',
+  req: 'list-thing-types'
+}, {
+  prop: 'pull-thing-types',
+  req: 'pull-resources',
+  resource: 'thing-type',
+  servicePath: '/thing-types',
+  title: 'Thing Types'
+}, {
+  prop: 'patch-thing-types',
+  req: 'patch-resources',
+  resource: 'thing-type',
+  servicePath: '/thing-types',
+  title: 'Thing Types'
+}, {
+  prop: 'push-thing-types',
+  req: 'push-resources',
+  resource: 'thing-type',
+  servicePath: '/thing-types',
+  title: 'Thing Types'
+}, {
+  prop: 'remove-thing-type',
+  req: 'remove-resource-objectId',
+  resource: 'thing-type',
+  servicePath: '/thing-types'
+}, {
+  prop: 'update-thing-type',
+  req: 'update-resource',
+  resource: 'thing-type',
+  servicePath: '/thing-types'
+}, {
   prop: 'create-uom',
   req: 'create-resource',
   resource: 'uom',
@@ -407,6 +514,12 @@ const COMMANDS = [{
 }, {
   prop: 'list-uoms',
   req: 'list-uoms'
+}, {
+  prop: 'patch-uoms',
+  req: 'patch-resources',
+  resource: 'uom',
+  servicePath: '/uoms',
+  title: 'UOMs'
 }, {
   prop: 'pull-uoms',
   req: 'pull-resources',
@@ -443,6 +556,12 @@ const COMMANDS = [{
   prop: 'list-users',
   req: 'list-users'
 }, {
+  prop: 'patch-users',
+  req: 'patch-resources',
+  resource: 'user',
+  servicePath: '/users',
+  title: 'Users'
+}, {
   prop: 'pull-users',
   req: 'pull-resources',
   resource: 'user',
@@ -477,6 +596,12 @@ const COMMANDS = [{
 }, {
   prop: 'list-vocabularies',
   req: 'list-vocabularies'
+}, {
+  prop: 'patch-vocabularies',
+  req: 'patch-resources',
+  resource: 'vocabulary',
+  servicePath: '/vocabularies',
+  title: 'Vocabularies'
 }, {
   prop: 'pull-vocabularies',
   req: 'pull-resources',
@@ -545,6 +670,10 @@ module.exports = ctx => {
           opts: '--id=<id> [--deep] [--confirm] [--confirm-deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'
         }, {}, {
           lbl: 'meta',
+          cmd: 'patch-*',
+          opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--file=<file>] [--output=indent|raw] [--dry-run] [--verbose]'
+        }, {
+          lbl: 'meta',
           cmd: 'push-*',
           opts: '--filespec=<filespec> [--save] [--only=create|update] [--any-suffix] [--dry-run] [--verbose]'
         }, {
@@ -598,7 +727,7 @@ module.exports = ctx => {
             desc: 'Suppress deep confirmation prompt (set --confirm-deep=false for "no")'
           }]
         }, {
-          header: 'Push/Pull Options',
+          header: 'Patch/Push/Pull Options',
           items: [{
             opts: '--dir=<dir>',
             desc: 'Name of directory to save files to'
@@ -642,6 +771,9 @@ module.exports = ctx => {
             cmd: 'remove-<resource>',
             desc: 'Destroy <resource> <id>'
           }, {
+            cmd: 'patch-<resources>',
+            desc: 'Patch matching <resources> using <file> or "patch.<resource>.json"'
+          }, {
             cmd: 'push-<resources>',
             desc: 'Upload <resources> from files matching <filespec> (create or update)'
           }, {
@@ -682,7 +814,10 @@ module.exports = ctx => {
             desc: 'An observation post where data is measured and collected'
           }, {
             lbl: 'thing[s]',
-            desc: 'An abstract type or physical instance of an instrument or other equipment'
+            desc: 'An specific instrument or other equipment that is deployed'
+          }, {
+            lbl: 'thing-type[s]',
+            desc: 'A make and model of instrument or other equipment'
           }, {
             lbl: 'uom[s]',
             desc: 'A quantity used as a standard of measurement'

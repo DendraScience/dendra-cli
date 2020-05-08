@@ -27,7 +27,7 @@ const MOMENT_FORMATS = [
   'YYYY-M-DTH:mmZ',
   'YYYY-M-DTH:mm:ssZ'
 ]
-const RESERVED_REGEX = /^(_|_sliced|dir|dry-run|dry_run|file|filespec|limit|output|query|save|sort|sort:asc|sort:desc|verbose)$/
+const RESERVED_REGEX = /^(_|_sliced|dir|dry-run|dry_run|file|filespec|limit|output|params|query|save|sort|sort:asc|sort:desc|verbose)$/
 const BOOL_REGEX = /^(false|true)$/i
 
 function queryArgs(p, tableOpts, override) {
@@ -119,6 +119,24 @@ function coerceValue(val) {
   // String
   return val
 }
+
+function params(p) {
+  let q = p.params
+
+  if (q) {
+    try {
+      q = JSON.parse(q)
+    } catch (e) {
+      throw new Error('Cannot parse params')
+    }
+  } else {
+    q = {}
+  }
+
+  p.params = q
+}
+
+exports.params = params
 
 function value(p) {
   p.value = coerceValue(p.value)

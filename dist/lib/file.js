@@ -7,11 +7,26 @@
  * @license BSD-2-Clause-FreeBSD
  * @module lib/file
  */
+const fs = require('fs');
+
 const path = require('path');
 
 const loadJsonFile = require('load-json-file');
 
 const writeJsonFile = require('write-json-file');
+
+function loadFile(p, defaults, override) {
+  const opts = Object.assign({}, defaults, p, override);
+
+  if (opts.file) {
+    const fp = path.resolve(process.cwd(), opts.file);
+    return fs.promises.readFile(fp, 'utf8');
+  }
+
+  return Promise.reject(new Error('Required: file'));
+}
+
+exports.loadFile = loadFile;
 
 function loadJson(p, defaults, override) {
   const opts = Object.assign({}, defaults, p, override);

@@ -40,7 +40,7 @@ require('./app')(log).then(app => {
     },
     default: app.get('mergedSettings').content.default,
     boolean: ['any_suffix', 'confirm', 'confirm_deep', 'deep', 'dry_run', 'verbose'],
-    string: ['dir', 'file', 'filespec', 'id', 'output', 'value']
+    string: ['dir', 'file', 'filespec', 'id', 'output', 'params', 'value']
   });
   return app.command.eval(parsed);
 }).then(state => {
