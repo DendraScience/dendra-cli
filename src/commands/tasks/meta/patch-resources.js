@@ -23,8 +23,8 @@ module.exports = (
     },
 
     async execute(p) {
-      const text = await file.loadFile(p, {
-        file: `patch.${resource}.jsonata`
+      const text = await file.loadJsonata(p, {
+        jsonata: `patch.${resource}.jsonata`
       })
 
       let expr

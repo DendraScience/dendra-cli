@@ -15,19 +15,6 @@ const loadJsonFile = require('load-json-file');
 
 const writeJsonFile = require('write-json-file');
 
-function loadFile(p, defaults, override) {
-  const opts = Object.assign({}, defaults, p, override);
-
-  if (opts.file) {
-    const fp = path.resolve(process.cwd(), opts.file);
-    return fs.promises.readFile(fp, 'utf8');
-  }
-
-  return Promise.reject(new Error('Required: file'));
-}
-
-exports.loadFile = loadFile;
-
 function loadJson(p, defaults, override) {
   const opts = Object.assign({}, defaults, p, override);
 
@@ -40,6 +27,19 @@ function loadJson(p, defaults, override) {
 }
 
 exports.loadJson = loadJson;
+
+function loadJsonata(p, defaults, override) {
+  const opts = Object.assign({}, defaults, p, override);
+
+  if (opts.jsonata) {
+    const fp = path.resolve(process.cwd(), opts.jsonata);
+    return fs.promises.readFile(fp, 'utf8');
+  }
+
+  return Promise.reject(new Error('Required: jsonata'));
+}
+
+exports.loadJsonata = loadJsonata;
 
 function saveJson(data, p, defaults, override) {
   const opts = Object.assign({}, defaults, p, override);

@@ -765,7 +765,7 @@ module.exports = ctx => {
               lbl: 'meta',
               cmd: 'patch-*',
               opts:
-                '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--file=<file>] [--output=indent|raw] [--dry-run] [--verbose]'
+                '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--jsonata=<jsonata>] [--output=indent|raw] [--dry-run] [--verbose]'
             },
             {
               lbl: 'meta',
@@ -777,7 +777,7 @@ module.exports = ctx => {
               lbl: 'meta',
               cmd: 'pull-*',
               opts:
-                '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--output=indent|raw] [--dry-run] [--verbose]'
+                '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--jsonata=<jsonata>] [--output=indent|raw] [--dry-run] [--verbose]'
             }
           ],
           groups: [
@@ -853,6 +853,11 @@ module.exports = ctx => {
                   desc: 'Pattern to match one or more files'
                 },
                 {
+                  opts: '--jsonata=<jsonata>',
+                  desc:
+                    'Name of file containing a JSONata expression (https://jsonata.org/)'
+                },
+                {
                   opts: '--only=<verb>',
                   desc: 'Restrict uploading to create or update'
                 },
@@ -895,7 +900,7 @@ module.exports = ctx => {
                 {
                   cmd: 'patch-<resources>',
                   desc:
-                    'Patch matching <resources> using <file> or "patch.<resource>.json"'
+                    'Patch matching <resources> using <jsonata> or "patch.<resource>.jsonata"'
                 },
                 {
                   cmd: 'push-<resources>',

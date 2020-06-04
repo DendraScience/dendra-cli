@@ -1,3 +1,4 @@
+const jsonata = require('jsonata')
 const path = require('path')
 const ProgressBar = require('progress')
 
@@ -22,6 +23,17 @@ module.exports = (
     },
 
     async execute(p) {
+      let expr
+
+      if (p.jsonata) {
+        const text = await file.loadJsonata(p)
+        try {
+          expr = jsonata(text)
+        } catch (err) {
+          throw new Error(`Invalid JSONata: ${err.message}`)
+        }
+      }
+
       const findRes = await conns.web.app
         .service(servicePath)
         .find({ query: p.query })
@@ -56,11 +68,12 @@ module.exports = (
         await utils.sleep()
 
         const res = await conns.web.app.service(servicePath).get(item._id)
+        const data = expr ? expr.evaluate(res) : res
 
         if (p.dry_run) {
           output.push([{ text: 'Will save', tail: ':' }, fn])
         } else {
-          const out = await file.saveJson(res, p, null, {
+          const out = await file.saveJson(data, p, null, {
             file: fn,
             save: true
           })
