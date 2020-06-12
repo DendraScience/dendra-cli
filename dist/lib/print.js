@@ -15,11 +15,14 @@ const {
   FeathersError
 } = require('@feathersjs/errors');
 
-function print(obj, p) {
+function print(obj, p = {}) {
   if (obj instanceof FeathersError) {
     console.log(chalk`{inverse  ERR! } ${obj.message}`);
     console.log(jsome.getColoredString(obj.toJSON()));
   } else if (obj instanceof Error) {
+    console.log(chalk`{inverse  ERR! } ${obj.message}`);
+  } else if (typeof obj === 'object' && obj.stack && obj.code && obj.message) {
+    // JSONata evaluate errors
     console.log(chalk`{inverse  ERR! } ${obj.message}`);
   } else if (Array.isArray(obj)) {
     obj.forEach(el => {

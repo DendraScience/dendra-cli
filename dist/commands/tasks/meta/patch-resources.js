@@ -71,7 +71,21 @@ module.exports = ({
         });
         await utils.sleep();
         let res = await conns.web.app.service(servicePath).get(id);
-        const data = expr.evaluate(res) || {};
+        let data = {};
+        if (expr) try {
+          data = expr.evaluate(res);
+        } catch (err) {
+          if (err.message) {
+            output.push([{
+              text: 'Eval error',
+              tail: ':'
+            }, id]);
+            output.push(err.message);
+            break;
+          } else {
+            throw err;
+          }
+        }
 
         if (p.dry_run) {
           output.push([{

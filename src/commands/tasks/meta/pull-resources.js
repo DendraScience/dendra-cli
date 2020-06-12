@@ -68,7 +68,20 @@ module.exports = (
         await utils.sleep()
 
         const res = await conns.web.app.service(servicePath).get(item._id)
-        const data = expr ? expr.evaluate(res) : res
+        let data = res
+
+        if (expr)
+          try {
+            data = expr.evaluate(res)
+          } catch (err) {
+            if (err.message) {
+              output.push([{ text: 'Eval error', tail: ':' }, fn])
+              output.push(err.message)
+              break
+            } else {
+              throw err
+            }
+          }
 
         if (p.dry_run) {
           output.push([{ text: 'Will save', tail: ':' }, fn])
