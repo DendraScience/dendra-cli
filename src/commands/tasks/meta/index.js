@@ -48,6 +48,53 @@ const COMMANDS = [
     servicePath: '/annotations'
   },
 
+  {
+    prop: 'create-company',
+    req: 'create-resource',
+    resource: 'company',
+    servicePath: '/companies'
+  },
+  {
+    prop: 'get-company',
+    req: 'get-resource-objectId',
+    resource: 'company',
+    servicePath: '/companies'
+  },
+  { prop: 'list-companies', req: 'list-companies' },
+  {
+    prop: 'patch-companies',
+    req: 'patch-resources',
+    resource: 'company',
+    servicePath: '/companies',
+    title: 'Companies'
+  },
+  {
+    prop: 'pull-companies',
+    req: 'pull-resources',
+    resource: 'company',
+    servicePath: '/companies',
+    title: 'Companies'
+  },
+  {
+    prop: 'push-companies',
+    req: 'push-resources',
+    resource: 'company',
+    servicePath: '/companies',
+    title: 'Companies'
+  },
+  {
+    prop: 'remove-company',
+    req: 'remove-resource-objectId',
+    resource: 'company',
+    servicePath: '/companies'
+  },
+  {
+    prop: 'update-company',
+    req: 'update-resource',
+    resource: 'company',
+    servicePath: '/companies'
+  },
+
   { prop: 'clone-dashboard', req: 'clone-dashboard' },
   {
     prop: 'create-dashboard',
@@ -920,6 +967,11 @@ module.exports = ctx => {
                   lbl: 'annotation[s]',
                   desc:
                     'A note with optional actions to apply against a range of datapoints'
+                },
+                {
+                  lbl: 'compan(y|ies)',
+                  desc:
+                    'An equipment manufacturer, reseller, or other assemblage of individuals'
                 },
                 {
                   lbl: 'dashboard[s]',

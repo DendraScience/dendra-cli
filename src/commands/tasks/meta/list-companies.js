@@ -11,13 +11,13 @@ module.exports = ({ conns, file, parse, style }) => {
 
     beforeExecute(p) {
       parse.queryArgs(p, {
-        $select: ['_id', 'model', 'name']
+        $select: ['_id', 'full_name', 'name', 'company_type']
       })
     },
 
     execute(p) {
       return conns.web.app
-        .service('/thing-types')
+        .service('/companies')
         .find({ query: p.query })
         .then(res =>
           file.saveJson(res, p, {
@@ -35,14 +35,19 @@ module.exports = ({ conns, file, parse, style }) => {
             size: 24
           },
           {
-            mode: 'fill',
-            name: 'model',
-            size: 24
+            alias: 'type',
+            name: 'company_type',
+            size: 12
           },
           {
             mode: 'fill',
             name: 'name',
-            size: 36
+            size: 24
+          },
+          {
+            mode: 'fill',
+            name: 'full_name',
+            size: 24
           }
         ],
         p
