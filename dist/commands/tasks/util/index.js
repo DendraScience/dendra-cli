@@ -3,6 +3,29 @@
 const path = require('path');
 
 const COMMANDS = [{
+  prop: 'create-download',
+  req: '../meta/create-resource',
+  resource: 'download',
+  servicePath: '/downloads'
+}, {
+  prop: 'get-download',
+  req: '../meta/get-resource-objectId',
+  resource: 'download',
+  servicePath: '/downloads'
+}, {
+  prop: 'list-downloads',
+  req: 'list-downloads'
+}, {
+  prop: 'remove-download',
+  req: '../meta/remove-resource-objectId',
+  resource: 'download',
+  servicePath: '/downloads'
+}, {
+  prop: 'update-download',
+  req: '../meta/update-resource',
+  resource: 'download',
+  servicePath: '/downloads'
+}, {
   prop: 'create-upload',
   req: '../meta/create-resource',
   resource: 'upload',
@@ -126,6 +149,9 @@ module.exports = ctx => {
         }, {
           header: 'Resources',
           items: [{
+            lbl: 'download[s]',
+            desc: 'A specification for one or more resources to be downloaded from the system'
+          }, {
             lbl: 'upload[s]',
             desc: 'A specification for one or more resources to be uploaded into the system'
           }]
