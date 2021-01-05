@@ -28,6 +28,32 @@ const COMMANDS = [
   },
 
   {
+    prop: 'create-monitor',
+    req: '../meta/create-resource',
+    resource: 'monitor',
+    servicePath: '/monitors'
+  },
+  {
+    prop: 'get-monitor',
+    req: '../meta/get-resource-objectId',
+    resource: 'monitor',
+    servicePath: '/monitors'
+  },
+  { prop: 'list-monitors', req: 'list-monitors' },
+  {
+    prop: 'remove-monitor',
+    req: '../meta/remove-resource-objectId',
+    resource: 'monitor',
+    servicePath: '/monitors'
+  },
+  {
+    prop: 'update-monitor',
+    req: '../meta/update-resource',
+    resource: 'monitor',
+    servicePath: '/monitors'
+  },
+
+  {
     prop: 'create-upload',
     req: '../meta/create-resource',
     resource: 'upload',
@@ -186,6 +212,11 @@ module.exports = ctx => {
                   lbl: 'download[s]',
                   desc:
                     'A specification for one or more resources to be downloaded from the system'
+                },
+                {
+                  lbl: 'monitor[s]',
+                  desc:
+                    'A specification for automated monitoring of resources or system components'
                 },
                 {
                   lbl: 'upload[s]',

@@ -1,7 +1,7 @@
 {
   "connections": {
     "web": {
-      "url": "http://api.staging.dendra.science/v1"
+      "url": "http://api.staging.dendra.science/v2"
     }
   }
 }
