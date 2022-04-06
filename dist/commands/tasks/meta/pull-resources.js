@@ -67,7 +67,7 @@ module.exports = ({
         width: 20
       });
 
-      for (let item of findRes.data) {
+      for (const item of findRes.data) {
         const fn = path.join(p.dir || '', `${item._id}${suffix}`);
         bar.tick({
           fn

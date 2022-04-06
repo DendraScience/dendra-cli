@@ -66,7 +66,7 @@ async function cloneMany(ctx, {
     });
     if (!(findRes && findRes.data.length)) break;
 
-    for (let res of findRes.data) {
+    for (const res of findRes.data) {
       try {
         await cloneOne(ctx, {
           id: res._id,

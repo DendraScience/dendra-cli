@@ -53,13 +53,11 @@ module.exports = ctx => {
                 {},
                 {
                   cmd: 'init',
-                  desc:
-                    'Create a project settings file (den.json) in the current directory'
+                  desc: 'Create a project settings file (den.json) in the current directory'
                 },
                 {
                   cmd: 'login',
-                  desc:
-                    'Log in to a Dendra environment, prompt for credentials if not provided'
+                  desc: 'Log in to a Dendra environment, prompt for credentials if not provided'
                 },
                 { cmd: 'logout', desc: 'Log out of a Dendra environment' },
                 {

@@ -55,7 +55,7 @@ async function cloneMany(ctx, { output, p, query, resource, servicePath }, cb) {
 
     if (!(findRes && findRes.data.length)) break
 
-    for (let res of findRes.data) {
+    for (const res of findRes.data) {
       try {
         await cloneOne(
           ctx,

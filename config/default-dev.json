@@ -1,7 +1,7 @@
 {
   "connections": {
     "web": {
-      "url": "http://localhost:3030"
+      "url": "http://api.dev.dendra.science/v2"
     }
   }
 }

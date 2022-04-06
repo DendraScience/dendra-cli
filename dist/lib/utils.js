@@ -44,7 +44,7 @@ function setByDot(obj, path, value, ifDelete) {
   const lastIndex = parts.length - 1;
   return parts.reduce((obj1, part, i) => {
     if (i !== lastIndex) {
-      if (!obj1.hasOwnProperty(part) || typeof obj1[part] !== 'object') {
+      if (!Object.prototype.hasOwnProperty.call(obj1, part) || typeof obj1[part] !== 'object') {
         obj1[part] = {};
       }
 

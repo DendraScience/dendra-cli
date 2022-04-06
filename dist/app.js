@@ -30,7 +30,7 @@ module.exports = async log => {
     appropriate app config files.
    */
 
-  process.env.NODE_CONFIG_DIR = path.resolve(__dirname, '../config');
+  process.env.NODE_CONFIG_DIR = process.env.DEN_CONFIG_DIR ? path.resolve(process.env.DEN_CONFIG_DIR) : path.resolve(__dirname, '../config');
   process.env.NODE_APP_INSTANCE = app.get('mergedSettings').content.environment; // Configure
 
   app.configure(require('@feathersjs/configuration')()); // Feathers setup

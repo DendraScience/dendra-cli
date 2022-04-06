@@ -5,7 +5,7 @@ const restClient = require('@feathersjs/rest-client')
 const request = require('request')
 const murmurHash3 = require('murmurhash3js')
 
-module.exports = function(app) {
+module.exports = function (app) {
   const connections = app.get('connections') || {}
   const userSettings = app.get('userSettings')
   const tokens = userSettings.content.tokens || {}

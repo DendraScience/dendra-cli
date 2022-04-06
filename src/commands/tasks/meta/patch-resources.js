@@ -59,7 +59,7 @@ module.exports = (
         }
       )
 
-      for (let item of findRes.data) {
+      for (const item of findRes.data) {
         const id = item._id
 
         bar.tick({ id })

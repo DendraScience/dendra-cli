@@ -19,7 +19,7 @@ async function removeOne({
   servicePath
 }, cb) {
   if (cb) cb(id);
-  let res = await conns.web.app.service(servicePath).remove(id);
+  const res = await conns.web.app.service(servicePath).remove(id);
   if (p.verbose) output.push([{
     text: 'Removed',
     tail: ':',
@@ -65,7 +65,7 @@ async function removeMany(ctx, {
     });
     if (!(findRes && findRes.data.length)) break;
 
-    for (let res of findRes.data) {
+    for (const res of findRes.data) {
       await removeOne(ctx, {
         id: res._id,
         output,

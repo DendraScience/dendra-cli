@@ -35,7 +35,7 @@ module.exports = (
         }
       )
 
-      for (let fn of files) {
+      for (const fn of files) {
         let skip
         let data
         let res

@@ -773,58 +773,49 @@ module.exports = ctx => {
             {
               lbl: 'meta',
               cmd: 'get-*',
-              opts:
-                '--id=<id> [--file=<file> | --save] [--output=color|indent|raw]'
+              opts: '--id=<id> [--file=<file> | --save] [--output=color|indent|raw]'
             },
             {
               lbl: 'meta',
               cmd: 'list-*',
-              opts:
-                '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--file=<file>] [--output=table|color|indent|raw]'
+              opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--file=<file>] [--output=table|color|indent|raw]'
             },
             {},
             {
               lbl: 'meta',
               cmd: 'create-*',
-              opts:
-                '[--id=<id>] [--file=<file>] [--save] [--output=color|indent|raw]'
+              opts: '[--id=<id>] [--file=<file>] [--save] [--output=color|indent|raw]'
             },
             {
               lbl: 'meta',
               cmd: 'update-*',
-              opts:
-                '[--id=<id>] [--file=<file>] [--save] [--output=color|indent|raw]'
+              opts: '[--id=<id>] [--file=<file>] [--save] [--output=color|indent|raw]'
             },
             {
               lbl: 'meta',
               cmd: 'clone-*',
-              opts:
-                '--id=<id> [--deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'
+              opts: '--id=<id> [--deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'
             },
             {
               lbl: 'meta',
               cmd: 'remove-*',
-              opts:
-                '--id=<id> [--deep] [--confirm] [--confirm-deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'
+              opts: '--id=<id> [--deep] [--confirm] [--confirm-deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'
             },
             {},
             {
               lbl: 'meta',
               cmd: 'patch-*',
-              opts:
-                '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--jsonata=<jsonata>] [--output=indent|raw] [--dry-run] [--verbose]'
+              opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--jsonata=<jsonata>] [--output=indent|raw] [--dry-run] [--verbose]'
             },
             {
               lbl: 'meta',
               cmd: 'push-*',
-              opts:
-                '--filespec=<filespec> [--save] [--only=create|update] [--any-suffix] [--dry-run] [--verbose]'
+              opts: '--filespec=<filespec> [--save] [--only=create|update] [--any-suffix] [--dry-run] [--verbose]'
             },
             {
               lbl: 'meta',
               cmd: 'pull-*',
-              opts:
-                '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--jsonata=<jsonata>] [--output=indent|raw] [--dry-run] [--verbose]'
+              opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--dir=<dir>] [--jsonata=<jsonata>] [--output=indent|raw] [--dry-run] [--verbose]'
             }
           ],
           groups: [
@@ -873,18 +864,15 @@ module.exports = ctx => {
               items: [
                 {
                   opts: '--deep',
-                  desc:
-                    'Process this resource and all associated child resources'
+                  desc: 'Process this resource and all associated child resources'
                 },
                 {
                   opts: '--confirm',
-                  desc:
-                    'Suppress confirmation prompt (set --confirm=false for "no")'
+                  desc: 'Suppress confirmation prompt (set --confirm=false for "no")'
                 },
                 {
                   opts: '--confirm-deep',
-                  desc:
-                    'Suppress deep confirmation prompt (set --confirm-deep=false for "no")'
+                  desc: 'Suppress deep confirmation prompt (set --confirm-deep=false for "no")'
                 }
               ]
             },
@@ -901,8 +889,7 @@ module.exports = ctx => {
                 },
                 {
                   opts: '--jsonata=<jsonata>',
-                  desc:
-                    'Name of file containing a JSONata expression (https://jsonata.org/)'
+                  desc: 'Name of file containing a JSONata expression (https://jsonata.org/)'
                 },
                 {
                   opts: '--only=<verb>',
@@ -910,8 +897,7 @@ module.exports = ctx => {
                 },
                 {
                   opts: '--any-suffix',
-                  desc:
-                    'Process all matching files (don\'t require "*.<resource>.json")'
+                  desc: 'Process all matching files (don\'t require "*.<resource>.json")'
                 },
                 {
                   opts: '--dry-run',
@@ -935,24 +921,20 @@ module.exports = ctx => {
                 { cmd: 'clone-station', desc: 'Clone station <id>' },
                 {
                   cmd: 'create-<resource>',
-                  desc:
-                    'Insert a new <resource> from <file> or "<id>.<resource>.json"'
+                  desc: 'Insert a new <resource> from <file> or "<id>.<resource>.json"'
                 },
                 {
                   cmd: 'update-<resource>',
-                  desc:
-                    'Replace <resource> from <file> or "<id>.<resource>.json"'
+                  desc: 'Replace <resource> from <file> or "<id>.<resource>.json"'
                 },
                 { cmd: 'remove-<resource>', desc: 'Destroy <resource> <id>' },
                 {
                   cmd: 'patch-<resources>',
-                  desc:
-                    'Patch matching <resources> using <jsonata> or "patch.<resource>.jsonata"'
+                  desc: 'Patch matching <resources> using <jsonata> or "patch.<resource>.jsonata"'
                 },
                 {
                   cmd: 'push-<resources>',
-                  desc:
-                    'Upload <resources> from files matching <filespec> (create or update)'
+                  desc: 'Upload <resources> from files matching <filespec> (create or update)'
                 },
                 {
                   cmd: 'pull-<resources>',
@@ -965,23 +947,19 @@ module.exports = ctx => {
               items: [
                 {
                   lbl: 'annotation[s]',
-                  desc:
-                    'A note with optional actions to apply against a range of datapoints'
+                  desc: 'A note with optional actions to apply against a range of datapoints'
                 },
                 {
                   lbl: 'compan(y|ies)',
-                  desc:
-                    'An equipment manufacturer, reseller, or other assemblage of individuals'
+                  desc: 'An equipment manufacturer, reseller, or other assemblage of individuals'
                 },
                 {
                   lbl: 'dashboard[s]',
-                  desc:
-                    'A collection of graphs and widgets displaying realtime data'
+                  desc: 'A collection of graphs and widgets displaying realtime data'
                 },
                 {
                   lbl: 'datastream[s]',
-                  desc:
-                    'A continuous series of datapoints indexed in time order'
+                  desc: 'A continuous series of datapoints indexed in time order'
                 },
                 {
                   lbl: 'membership[s]',
@@ -993,29 +971,24 @@ module.exports = ctx => {
                 },
                 {
                   lbl: 'person[s]',
-                  desc:
-                    'A data consumer, responsible party, or user of the system'
+                  desc: 'A data consumer, responsible party, or user of the system'
                 },
                 {
                   lbl: 'place[s]',
-                  desc:
-                    'A specific, named location with corresponding geo coordinates'
+                  desc: 'A specific, named location with corresponding geo coordinates'
                 },
                 {
                   lbl: 'scheme[s]',
-                  desc:
-                    'A namespace (scheme) for one or more controlled vocabularies'
+                  desc: 'A namespace (scheme) for one or more controlled vocabularies'
                 },
                 { lbl: 'som[s]', desc: 'A collection of units of measurement' },
                 {
                   lbl: 'station[s]',
-                  desc:
-                    'An observation post where data is measured and collected'
+                  desc: 'An observation post where data is measured and collected'
                 },
                 {
                   lbl: 'thing[s]',
-                  desc:
-                    'An specific instrument or other equipment that is deployed'
+                  desc: 'An specific instrument or other equipment that is deployed'
                 },
                 {
                   lbl: 'thing-type[s]',
@@ -1031,8 +1004,7 @@ module.exports = ctx => {
                 },
                 {
                   lbl: 'vocabular(y|ies)',
-                  desc:
-                    'A controlled vocabulary used to tag data producing entities'
+                  desc: 'A controlled vocabulary used to tag data producing entities'
                 }
               ]
             }

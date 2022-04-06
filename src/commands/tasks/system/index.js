@@ -23,8 +23,7 @@ module.exports = ctx => {
             {
               lbl: 'system',
               cmd: 'get-*',
-              opts:
-                '--id=<id> [--file=<file> | --save] [--output=color|indent|raw]'
+              opts: '--id=<id> [--file=<file> | --save] [--output=color|indent|raw]'
             }
           ],
           groups: [
