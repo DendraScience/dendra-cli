@@ -1,13 +1,10 @@
 "use strict";
 
 const ProgressBar = require('progress');
-
 const {
   promisify
 } = require('util');
-
 const glob = promisify(require('glob'));
-
 module.exports = ({
   conns,
   file,
@@ -24,7 +21,6 @@ module.exports = ({
       if (!p._sliced.length) valid.string(p, 'filespec');
       return true;
     },
-
     async execute(p) {
       const files = p._sliced.length ? p._sliced : await glob(p.filespec, {
         nodir: true
@@ -40,7 +36,6 @@ module.exports = ({
         total: files.length,
         width: 20
       });
-
       for (const fn of files) {
         let skip;
         let data;
@@ -50,7 +45,6 @@ module.exports = ({
         });
         await utils.sleep();
         if (!(p.any_suffix || fn.endsWith(suffix))) skip = true;
-
         if (!skip) {
           try {
             data = await file.loadJson({
@@ -61,11 +55,9 @@ module.exports = ({
               bar.terminate();
               throw e;
             }
-
             skip = true;
           }
         }
-
         if (!skip && data._id) {
           try {
             if (p.only === 'create') {
@@ -91,7 +83,6 @@ module.exports = ({
             }
           }
         }
-
         if (!skip && !res) {
           if (p.only === 'update') {
             skip = true;
@@ -117,7 +108,6 @@ module.exports = ({
             }]);
           }
         }
-
         if (!skip && res && p.save) {
           if (p.dry_run) {
             output.push([{
@@ -131,7 +121,6 @@ module.exports = ({
             if (p.verbose && Array.isArray(out)) output.push(...out);
           }
         }
-
         if (skip) {
           if (p.dry_run) output.push([{
             text: 'Will skip',
@@ -150,11 +139,9 @@ module.exports = ({
           }]);
         }
       }
-
       output.push(style.EMPTY);
       output.push('Done!');
       return output;
     }
-
   };
 };

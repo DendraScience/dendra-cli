@@ -7,14 +7,12 @@
  * @license BSD-2-Clause-FreeBSD
  * @module lib/print
  */
+
 const chalk = require('chalk');
-
 const jsome = require('jsome');
-
 const {
   FeathersError
 } = require('@feathersjs/errors');
-
 function print(obj, p = {}) {
   if (obj instanceof FeathersError) {
     console.log(chalk`{inverse  ERR! } ${obj.message}`);
@@ -40,10 +38,8 @@ function print(obj, p = {}) {
           const tail = span.tail || '';
           const width = typeof span.width === 'number' ? span.width : 14;
           let out = `${span.text}`;
-
           if (!isLast && width) {
             const maxLen = width - tail.length;
-
             if (out.length > maxLen) {
               out = out.substr(0, maxLen) + tail; // Trim to fit
             } else {
@@ -53,7 +49,6 @@ function print(obj, p = {}) {
           } else {
             out += tail;
           }
-
           if (span.dim) out = chalk.dim(out);
           if (span.bold) out = chalk.bold(out);
           if (span.fg) out = chalk.keyword(span.fg)(out);
@@ -86,5 +81,4 @@ function print(obj, p = {}) {
     }
   }
 }
-
 module.exports = print;

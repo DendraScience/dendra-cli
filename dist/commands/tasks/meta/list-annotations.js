@@ -12,13 +12,11 @@ module.exports = ({
         query: p._sliced[0]
       }, p);
     },
-
     beforeExecute(p) {
       parse.queryArgs(p, {
         $select: ['_id', 'begins_at', 'enabled', 'ends_before', 'is_enabled', 'title']
       });
     },
-
     execute(p) {
       return conns.web.app.service('/annotations').find({
         query: p.query
@@ -26,7 +24,6 @@ module.exports = ({
         save: p.file
       }));
     },
-
     format(p, res) {
       return style.dataTable(res, [{
         name: '_id',
@@ -47,6 +44,5 @@ module.exports = ({
         size: 36
       }], p);
     }
-
   };
 };

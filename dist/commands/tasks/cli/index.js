@@ -1,9 +1,7 @@
 "use strict";
 
 const path = require('path');
-
 const COMMANDS = ['get-project-settings', 'get-user-settings', 'init-project', 'login', 'logout', 'set-project-environment', 'set-project-field', 'set-user-environment', 'set-user-field', 'whoami'];
-
 module.exports = ctx => {
   const {
     style
@@ -99,7 +97,6 @@ module.exports = ctx => {
         }]
       }, p);
     },
-
     tasks
   };
 };

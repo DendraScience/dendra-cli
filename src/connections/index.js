@@ -22,7 +22,7 @@ module.exports = function (app) {
       .configure(
         auth({
           storage: localStorage,
-          storageKey: storageKey
+          storageKey
         })
       )
   })

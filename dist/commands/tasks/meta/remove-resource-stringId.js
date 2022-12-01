@@ -1,11 +1,9 @@
 "use strict";
 
 const inquirer = require('inquirer');
-
 const {
   removeOne
 } = require('./_remove');
-
 module.exports = (ctx, {
   resource,
   servicePath
@@ -19,12 +17,10 @@ module.exports = (ctx, {
         id: p._sliced[0]
       }, p);
     },
-
     check(p) {
       valid.string(p, 'id');
       return true;
     },
-
     async execute(p) {
       if (!p.confirm) {
         const answers = await inquirer.prompt([{
@@ -35,7 +31,6 @@ module.exports = (ctx, {
         }]);
         if (!answers.confirm) return;
       }
-
       return removeOne(ctx, {
         id: p.id,
         output: [],
@@ -44,6 +39,5 @@ module.exports = (ctx, {
         servicePath
       });
     }
-
   };
 };

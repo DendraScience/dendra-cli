@@ -17,12 +17,10 @@ module.exports = ({
       const userRes = await conns.web.app.service('/users').get(payload.userId);
       return userRes;
     },
-
     format(p, res) {
       const environment = mergedSettings.content.environment;
       if (res.logged_out) return `Logged out of: ${environment}`;
       return [res, style.EMPTY, `Logged in to: ${environment}`];
     }
-
   };
 };

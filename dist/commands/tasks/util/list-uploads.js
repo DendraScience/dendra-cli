@@ -12,13 +12,11 @@ module.exports = ({
         query: p._sliced[0]
       }, p);
     },
-
     beforeExecute(p) {
       parse.queryArgs(p, {
         $select: ['_id', 'storage.method', 'spec_type', 'spec.method', 'spec.comment']
       });
     },
-
     execute(p) {
       return conns.web.app.service('/uploads').find({
         query: p.query
@@ -26,7 +24,6 @@ module.exports = ({
         save: p.file
       }));
     },
-
     format(p, res) {
       return style.dataTable(res, [{
         name: '_id',
@@ -46,6 +43,5 @@ module.exports = ({
         size: 36
       }], p);
     }
-
   };
 };

@@ -1,13 +1,12 @@
 "use strict";
 
 const userSettings = require('./userSettings');
-
 const projectSettings = require('./projectSettings');
-
 module.exports = async app => {
   await userSettings(app);
-  await projectSettings(app); // TODO: Refactor into MergedSettings class?
+  await projectSettings(app);
 
+  // TODO: Refactor into MergedSettings class?
   const mergedSettings = {
     content: Object.assign({}, app.get('userSettings').safeContent, app.get('projectSettings').safeContent)
   };

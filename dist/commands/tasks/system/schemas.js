@@ -17,12 +17,10 @@ module.exports = ({
         });
       });
     },
-
     format(p, res) {
       return style.dataTable(res, [{
         name: '$id'
       }], p);
     }
-
   };
 };

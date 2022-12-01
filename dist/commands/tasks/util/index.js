@@ -1,7 +1,6 @@
 "use strict";
 
 const path = require('path');
-
 const COMMANDS = [{
   prop: 'create-download',
   req: '../meta/create-resource',
@@ -72,7 +71,6 @@ const COMMANDS = [{
   resource: 'upload',
   servicePath: '/uploads'
 }];
-
 module.exports = ctx => {
   const {
     style
@@ -184,7 +182,6 @@ module.exports = ctx => {
         }]
       }, p);
     },
-
     tasks
   };
 };

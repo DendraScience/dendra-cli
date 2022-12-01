@@ -1,9 +1,7 @@
 "use strict";
 
 const jsonata = require('jsonata');
-
 const ProgressBar = require('progress');
-
 module.exports = ({
   conns,
   file,
@@ -21,38 +19,32 @@ module.exports = ({
         query: p._sliced[0]
       }, p);
     },
-
     beforeExecute(p) {
       parse.queryArgs(p, null, {
         $select: ['_id']
       });
       parse.params(p);
     },
-
     async execute(p) {
       const text = await file.loadJsonata(p, {
         jsonata: `patch.${resource}.jsonata`
       });
       let expr;
-
       try {
         expr = jsonata(text);
       } catch (err) {
         throw new Error(`Invalid JSONata: ${err.message}`);
       }
-
       const findRes = await conns.web.app.service(servicePath).find({
         query: p.query
       });
       const output = [];
-
       if (p.verbose && p.query) {
         output.push({
           query: p.query
         });
         output.push(style.EMPTY);
       }
-
       if (!findRes.data) throw new Error('No data');
       if (!findRes.data.length) output.push('No items found');
       const bar = new ProgressBar(`Patching ${title.toLowerCase()} [:bar] :current/:total`, {
@@ -63,7 +55,6 @@ module.exports = ({
         total: findRes.data.length,
         width: 20
       });
-
       for (const item of findRes.data) {
         const id = item._id;
         bar.tick({
@@ -86,7 +77,6 @@ module.exports = ({
             throw err;
           }
         }
-
         if (p.dry_run) {
           output.push([{
             text: 'Will patch',
@@ -101,7 +91,6 @@ module.exports = ({
               $client: p.params
             }
           });
-
           if (p.verbose) {
             output.push([{
               text: 'Patched',
@@ -113,11 +102,9 @@ module.exports = ({
           }
         }
       }
-
       output.push(style.EMPTY);
       output.push('Done!');
       return output;
     }
-
   };
 };

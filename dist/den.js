@@ -10,9 +10,7 @@
 "use strict";
 
 const mri = require('mri');
-
 const print = require('./lib/print');
-
 const log = console;
 process.on('uncaughtException', err => {
   log.error(`An unexpected error occurred\n  ${err.stack}`);
@@ -26,10 +24,8 @@ process.on('unhandledRejection', err => {
   } else {
     log.error(`An unexpected rejection occurred\n  ${err}`);
   }
-
   process.exit(1);
 });
-
 require('./app')(log).then(app => {
   const args = process.argv.slice(2);
   const parsed = mri(args, {

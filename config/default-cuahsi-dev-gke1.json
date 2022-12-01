@@ -1,0 +1,7 @@
+{
+  "connections": {
+    "web": {
+      "url": "https://api.dendradev-gke1.dendra.cuahsi.org/v2"
+    }
+  }
+}

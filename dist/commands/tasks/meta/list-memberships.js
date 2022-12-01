@@ -12,13 +12,11 @@ module.exports = ({
         query: p._sliced[0]
       }, p);
     },
-
     beforeExecute(p) {
       parse.queryArgs(p, {
         $select: ['_id', 'organization_id', 'person_id', 'roles']
       });
     },
-
     execute(p) {
       return conns.web.app.service('/memberships').find({
         query: p.query
@@ -26,7 +24,6 @@ module.exports = ({
         save: p.file
       }));
     },
-
     format(p, res) {
       return style.dataTable(res, [{
         name: '_id',
@@ -43,6 +40,5 @@ module.exports = ({
         size: 36
       }], p);
     }
-
   };
 };

@@ -12,13 +12,11 @@ module.exports = ({
         query: p._sliced[0]
       }, p);
     },
-
     beforeExecute(p) {
       parse.queryArgs(p, {
         $select: ['_id', 'full_name', 'geo.type', 'name', 'place_type']
       });
     },
-
     execute(p) {
       return conns.web.app.service('/places').find({
         query: p.query
@@ -26,7 +24,6 @@ module.exports = ({
         save: p.file
       }));
     },
-
     format(p, res) {
       return style.dataTable(res, [{
         name: '_id',
@@ -48,6 +45,5 @@ module.exports = ({
         size: 24
       }], p);
     }
-
   };
 };

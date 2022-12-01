@@ -1,14 +1,11 @@
 "use strict";
 
 const inquirer = require('inquirer');
-
 const ora = require('ora');
-
 const {
   removeOne,
   removeMany
 } = require('./_remove');
-
 module.exports = ctx => {
   const {
     style,
@@ -20,16 +17,13 @@ module.exports = ctx => {
         id: p._sliced[0]
       }, p);
     },
-
     check(p) {
       valid.objectId(p);
       return true;
     },
-
     async execute(p) {
       let confirm = p.confirm;
       let confirmDeep = p.deep ? p.confirm_deep : false;
-
       if (typeof confirm !== 'boolean') {
         const answers = await inquirer.prompt([{
           type: 'confirm',
@@ -39,7 +33,6 @@ module.exports = ctx => {
         }]);
         confirm = answers.confirm;
       }
-
       if (typeof confirmDeep !== 'boolean') {
         const answers = await inquirer.prompt([{
           type: 'confirm',
@@ -49,12 +42,10 @@ module.exports = ctx => {
         }]);
         confirmDeep = answers.confirm;
       }
-
       const output = [];
       let count = 0;
       let spinner;
       let station;
-
       if (confirmDeep) {
         spinner = ora({
           spinner: 'bouncingBar',
@@ -74,7 +65,6 @@ module.exports = ctx => {
           spinner.text = `Removing datastream: ${id}`;
         });
       }
-
       if (confirm) {
         station = await removeOne(ctx, {
           id: p.id,
@@ -87,16 +77,13 @@ module.exports = ctx => {
           if (spinner) spinner.text = `Removing station: ${id}`;
         });
       }
-
       if (spinner) {
         spinner.succeed(`Removed ${count} resources(s)`);
         output.push(style.EMPTY);
         output.push('Done!');
         return output;
       }
-
       return station;
     }
-
   };
 };

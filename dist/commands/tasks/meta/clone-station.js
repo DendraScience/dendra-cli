@@ -1,12 +1,10 @@
 "use strict";
 
 const ora = require('ora');
-
 const {
   cloneOne,
   cloneMany
 } = require('./_clone');
-
 module.exports = ctx => {
   const {
     style,
@@ -18,12 +16,10 @@ module.exports = ctx => {
         id: p._sliced[0]
       }, p);
     },
-
     check(p) {
       valid.objectId(p);
       return true;
     },
-
     async execute(p) {
       const output = [];
       const spinner = ora({
@@ -48,7 +44,6 @@ module.exports = ctx => {
         if (res.slug) res.slug = `${res.slug}-clone`;
         return res;
       });
-
       if (p.deep) {
         await cloneMany(ctx, {
           output,
@@ -67,12 +62,10 @@ module.exports = ctx => {
           return res;
         });
       }
-
       spinner.succeed(`Cloned ${count} resources(s)`);
       output.push(style.EMPTY);
       output.push('Done!');
       return output;
     }
-
   };
 };

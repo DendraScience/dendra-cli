@@ -7,6 +7,7 @@
  * @license BSD-2-Clause-FreeBSD
  * @module meta/_clone
  */
+
 async function cloneOne({
   conns,
   file
@@ -39,9 +40,7 @@ async function cloneOne({
   if (p.verbose && Array.isArray(out)) output.push(...out);
   return res;
 }
-
 exports.cloneOne = cloneOne;
-
 async function cloneMany(ctx, {
   output,
   p,
@@ -55,7 +54,6 @@ async function cloneMany(ctx, {
   const $limit = 10;
   const $select = ['_id'];
   let $skip = 0;
-
   while (true) {
     const findRes = await conns.web.app.service(servicePath).find({
       query: Object.assign({}, query, {
@@ -65,7 +63,6 @@ async function cloneMany(ctx, {
       })
     });
     if (!(findRes && findRes.data.length)) break;
-
     for (const res of findRes.data) {
       try {
         await cloneOne(ctx, {
@@ -89,9 +86,7 @@ async function cloneMany(ctx, {
         }]);
       }
     }
-
     $skip += $limit;
   }
 }
-
 exports.cloneMany = cloneMany;

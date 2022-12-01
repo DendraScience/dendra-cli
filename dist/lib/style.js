@@ -7,39 +7,31 @@
  * @license BSD-2-Clause-FreeBSD
  * @module lib/style
  */
+
 const chalk = require('chalk');
-
 const packageJson = require('../../package.json');
-
 const stringLength = require('string-length');
-
 const {
   getBorderCharacters,
   table
 } = require('table');
-
 const {
   getByDot
 } = require('./utils');
-
 const EMPTY = '';
 exports.EMPTY = EMPTY;
-
 function placeholder(obj) {
   return typeof obj === 'undefined' || obj === null ? '..' : obj;
 }
-
 function processGroup(group, maxWidth, p, output, cb) {
   if (!(group.items && group.items.length)) return;
   const visItems = group.items.filter(item => !item.vis || p.all);
   const numItems = visItems.length;
   if (!numItems) return;
-
   if (group.header) {
     output.push(chalk.underline(group.header));
     output.push(EMPTY);
   }
-
   let col0Width = 0;
   const tableData = visItems.map(item => {
     const parts = [];
@@ -57,11 +49,9 @@ function processGroup(group, maxWidth, p, output, cb) {
     columnDefault: {
       paddingRight: 0
     },
-
     drawHorizontalLine() {
       return false;
     },
-
     columns: {
       0: {
         paddingLeft: 2,
@@ -76,18 +66,15 @@ function processGroup(group, maxWidth, p, output, cb) {
   output.push(table(tableData, tableConfig));
   return numItems;
 }
-
 function commandHelp(config, p) {
   const output = [EMPTY, ' _| _ _  _| _ _ ', `(_|(-| )(_|| (_| CLI ${packageJson.version}`, EMPTY];
   const ttyWidth = process.stdout.columns;
   const maxWidth = ttyWidth - 3;
   let showingCommon;
-
   if (config.title) {
     output.push(config.title);
     output.push(EMPTY);
   }
-
   if (config.synopsis && config.synopsis.length) {
     const group = {
       header: 'Usage',
@@ -98,7 +85,6 @@ function commandHelp(config, p) {
     });
     if (group.items.length > numItems) showingCommon = true;
   }
-
   if (config.groups && config.groups.length) {
     config.groups.forEach(group => {
       const numItems = processGroup(group, maxWidth, p, output, (item, parts) => {
@@ -107,7 +93,6 @@ function commandHelp(config, p) {
       if (group.items.length > numItems) showingCommon = true;
     });
   }
-
   if (p.all) {
     output.push('Showing all commands. To see only commonly used commands, remove the `--all` option.');
     output.push(EMPTY);
@@ -115,12 +100,9 @@ function commandHelp(config, p) {
     output.push('Showing only commonly used commands. To see all commands, add the `--all` option.');
     output.push(EMPTY);
   }
-
   return output;
 }
-
 exports.commandHelp = commandHelp;
-
 function dataTable(res, cols, p) {
   if (typeof res !== 'object' || Array.isArray(res)) return res;
   if (!Array.isArray(res.data)) return res;
@@ -128,22 +110,21 @@ function dataTable(res, cols, p) {
   const output = [];
   const ttyWidth = process.stdout.columns;
   let totalWidth = cols.reduce((total, col) => total + col.size + 1, 0);
-
   if (p.verbose && p.query) {
     output.push({
       query: p.query
     });
     output.push(EMPTY);
-  } // Remove intermediate columns that don't fit
+  }
 
-
+  // Remove intermediate columns that don't fit
   while (cols.length > 1 && totalWidth > ttyWidth) {
     const first = cols.shift();
     totalWidth -= cols.shift().size + 1;
     cols.unshift(first);
-  } // Map row object properties to column array
+  }
 
-
+  // Map row object properties to column array
   const tableData = res.data.map(rowObj => {
     return cols.map(col => {
       const value = (col.names || [col.name]).reduce((val, name) => {
@@ -151,34 +132,31 @@ function dataTable(res, cols, p) {
           const colVal = getByDot(rowObj, name);
           if (colVal !== undefined) return colVal;
         }
-
         return val;
       }, null);
       return placeholder(value);
     });
-  }); // Prepend header row
+  });
 
-  tableData.unshift(cols.map(col => chalk.bold(col.alias || col.name))); // Distribute any remaining space over all fill columns
+  // Prepend header row
+  tableData.unshift(cols.map(col => chalk.bold(col.alias || col.name)));
 
+  // Distribute any remaining space over all fill columns
   const fillCols = cols.filter(col => col.mode === 'fill');
   const remSpace = ttyWidth - totalWidth;
-
   if (fillCols.length && remSpace > 0) {
     const addSize = Math.floor(remSpace / fillCols.length);
     fillCols.forEach(col => col.size += addSize);
   }
-
   const tableConfig = {
     border: getBorderCharacters('void'),
     columnDefault: {
       paddingLeft: 0,
       paddingRight: 1
     },
-
     drawHorizontalLine() {
       return false;
     },
-
     columns: cols.map(col => {
       if (col.size > 1) return Object.assign({
         width: col.size
@@ -193,5 +171,4 @@ function dataTable(res, cols, p) {
   }, res.data.length]);
   return output;
 }
-
 exports.dataTable = dataTable;

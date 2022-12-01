@@ -3,7 +3,6 @@
 const {
   cloneOne
 } = require('./_clone');
-
 module.exports = ctx => {
   const {
     style,
@@ -15,12 +14,10 @@ module.exports = ctx => {
         id: p._sliced[0]
       }, p);
     },
-
     check(p) {
       valid.objectId(p);
       return true;
     },
-
     async execute(p) {
       const output = [];
       await cloneOne(ctx, {
@@ -39,6 +36,5 @@ module.exports = ctx => {
       output.push('Done!');
       return output;
     }
-
   };
 };

@@ -13,10 +13,8 @@ module.exports = ({
       await userSettings.save();
       return true;
     },
-
     format() {
       return `You are logged out of: ${mergedSettings.content.environment}`;
     }
-
   };
 };

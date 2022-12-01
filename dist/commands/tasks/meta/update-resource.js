@@ -13,7 +13,6 @@ module.exports = ({
         id: p._sliced[0]
       }, p);
     },
-
     execute(p) {
       return file.loadJson(p, {
         file: p.id && `${p.id}.${resource}.json`
@@ -24,6 +23,5 @@ module.exports = ({
         file: `${res._id}.${resource}.json`
       }));
     }
-
   };
 };

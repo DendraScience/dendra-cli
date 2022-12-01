@@ -1,7 +1,6 @@
 "use strict";
 
 const path = require('path');
-
 const COMMANDS = [{
   prop: 'create-annotation',
   req: 'create-resource',
@@ -666,7 +665,6 @@ const COMMANDS = [{
   resource: 'vocabulary',
   servicePath: '/vocabularies'
 }];
-
 module.exports = ctx => {
   const {
     style
@@ -878,7 +876,6 @@ module.exports = ctx => {
         }]
       }, p);
     },
-
     tasks
   };
 };

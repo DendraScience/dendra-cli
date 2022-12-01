@@ -1,9 +1,7 @@
 "use strict";
 
 const path = require('path');
-
 const COMMANDS = ['cli', 'init', 'login', 'logout', 'meta', 'system', 'util', 'whoami'];
-
 module.exports = ctx => {
   const {
     style
@@ -66,10 +64,12 @@ module.exports = ctx => {
             cmd: 'cli',
             sub: '<sub>',
             desc: 'Run a CLI subcommand'
-          }, // JSS: Not implemented
+          },
+          // JSS: Not implemented
           // {},
           // { cmd: 'json', sub: 'help', desc: 'Show help on JSON subcommands' },
           // { cmd: 'json', sub: '<sub>', desc: 'Run a JSON subcommand' },
+
           {}, {
             cmd: 'meta',
             sub: 'help',
@@ -94,7 +94,9 @@ module.exports = ctx => {
             cmd: 'util',
             sub: '<sub>',
             desc: 'Run a utility subcommand'
-          } // JSS: Not implemented
+          }
+
+          // JSS: Not implemented
           // {},
           // { cmd: 'version', sub: 'help', desc: 'Show help on version subcommands' },
           // { cmd: 'version', sub: '<sub>', desc: 'Run a version subcommand' },
@@ -103,7 +105,6 @@ module.exports = ctx => {
         }]
       }, p);
     },
-
     tasks
   };
 };

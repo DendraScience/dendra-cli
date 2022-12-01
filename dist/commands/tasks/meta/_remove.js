@@ -7,6 +7,7 @@
  * @license BSD-2-Clause-FreeBSD
  * @module meta/_remove
  */
+
 async function removeOne({
   conns,
   file
@@ -38,9 +39,7 @@ async function removeOne({
   if (p.verbose && Array.isArray(out)) output.push(...out);
   return res;
 }
-
 exports.removeOne = removeOne;
-
 async function removeMany(ctx, {
   output,
   p,
@@ -54,7 +53,6 @@ async function removeMany(ctx, {
   const $limit = 10;
   const $select = ['_id'];
   let $skip = 0;
-
   while (true) {
     const findRes = await conns.web.app.service(servicePath).find({
       query: Object.assign({}, query, {
@@ -64,7 +62,6 @@ async function removeMany(ctx, {
       })
     });
     if (!(findRes && findRes.data.length)) break;
-
     for (const res of findRes.data) {
       await removeOne(ctx, {
         id: res._id,
@@ -77,9 +74,7 @@ async function removeMany(ctx, {
         servicePath
       }, cb);
     }
-
     $skip += $limit;
   }
 }
-
 exports.removeMany = removeMany;

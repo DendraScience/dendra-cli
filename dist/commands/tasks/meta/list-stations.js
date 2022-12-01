@@ -12,13 +12,11 @@ module.exports = ({
         query: p._sliced[0]
       }, p);
     },
-
     beforeExecute(p) {
       parse.queryArgs(p, {
         $select: ['_id', 'enabled', 'is_enabled', 'name', 'slug', 'station_type', 'status', 'utc_offset']
       });
     },
-
     execute(p) {
       return conns.web.app.service('/stations').find({
         query: p.query
@@ -26,7 +24,6 @@ module.exports = ({
         save: p.file
       }));
     },
-
     format(p, res) {
       return style.dataTable(res, [{
         name: '_id',
@@ -59,6 +56,5 @@ module.exports = ({
         size: 24
       }], p);
     }
-
   };
 };

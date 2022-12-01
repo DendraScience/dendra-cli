@@ -1,9 +1,7 @@
 "use strict";
 
 const path = require('path');
-
 const COMMANDS = ['get-schema', 'get-time', 'schemas'];
-
 module.exports = ctx => {
   const {
     style
@@ -57,7 +55,6 @@ module.exports = ctx => {
         }]
       }, p);
     },
-
     tasks
   };
 };

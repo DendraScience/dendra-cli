@@ -11,6 +11,5 @@ module.exports = ({
         save: p.file
       }));
     }
-
   };
 };
