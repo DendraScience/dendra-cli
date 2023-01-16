@@ -8,6 +8,7 @@ const {
 } = require('./_remove');
 module.exports = ctx => {
   const {
+    conns,
     mergedSettings,
     style,
     valid
@@ -30,7 +31,7 @@ module.exports = ctx => {
         const answers = await inquirer.prompt([{
           type: 'confirm',
           default: false,
-          message: `Remove station ${p.id} from ${environment}`,
+          message: `Remove organization ${p.id} from ${environment}`,
           name: 'confirm'
         }]);
         confirm = answers.confirm;
@@ -39,47 +40,63 @@ module.exports = ctx => {
         const answers = await inquirer.prompt([{
           type: 'confirm',
           default: false,
-          message: 'Remove associated datastreams',
+          message: 'Remove associated datastreams, stations, annotations, downloads, uploads, monitors and memberships',
           name: 'confirm'
         }]);
         confirmDeep = answers.confirm;
       }
+      if (conns.web.remove_not_dangerous !== true) {
+        const environment = mergedSettings.content.environment;
+        const expected = 'REMOVE-ORGANIZATION';
+        const answers = await inquirer.prompt([{
+          type: 'input',
+          message: `DANGER! You are about the remove the organization ${p.id} from ${environment}. Type ${expected} in all caps to confirm`,
+          name: 'confirm'
+        }]);
+        if (answers.confirm !== expected) {
+          confirm = false;
+          confirmDeep = false;
+        }
+      }
       const output = [];
       let count = 0;
       let spinner;
-      let station;
+      let organization;
       if (confirmDeep) {
         spinner = ora({
           spinner: 'bouncingBar',
           stream: process.stdout,
           text: 'Removing...'
         }).start();
-        await removeMany(ctx, {
-          output,
-          p,
-          query: {
-            station_id: p.id
-          },
-          resource: 'datastream',
-          servicePath: '/datastreams'
-        }, id => {
-          count++;
-          spinner.text = `Removing datastream: ${id}`;
-        });
+        const resources = [['datastream', '/datastreams'], ['station', '/stations'], ['annotation', '/annotations'], ['download', '/downloads'], ['upload', '/uploads'], ['monitor', '/monitors'], ['membership', '/memberships']];
+        for (const [resource, servicePath] of resources) {
+          await removeMany(ctx, {
+            output,
+            p,
+            query: {
+              organization_id: p.id
+            },
+            resource,
+            servicePath
+          }, id => {
+            count++;
+            spinner.text = `Removing ${resource}: ${id}`;
+          });
+        }
       }
       if (confirm) {
-        station = await removeOne(ctx, {
+        organization = await removeOne(ctx, {
           id: p.id,
           ignoreNotFound: confirmDeep,
           output,
           p,
-          resource: 'station',
-          servicePath: '/stations'
+          resource: 'organization',
+          servicePath: '/organizations'
         }, id => {
           count++;
-          if (spinner) spinner.text = `Removing station: ${id}`;
+          if (spinner) spinner.text = `Removing organization: ${id}`;
         });
-        if (!station) count--;
+        if (!organization) count--;
       }
       if (spinner) {
         spinner.succeed(`Removed ${count} resources(s)`);
@@ -87,7 +104,7 @@ module.exports = ctx => {
         output.push('Done!');
         return output;
       }
-      return station;
+      return organization;
     }
   };
 };

@@ -9,6 +9,7 @@ module.exports = (ctx, {
   servicePath
 }) => {
   const {
+    mergedSettings,
     valid
   } = ctx;
   return {
@@ -23,10 +24,11 @@ module.exports = (ctx, {
     },
     async execute(p) {
       if (!p.confirm) {
+        const environment = mergedSettings.content.environment;
         const answers = await inquirer.prompt([{
           type: 'confirm',
           default: false,
-          message: `Remove ${resource} ${p.id}`,
+          message: `Remove ${resource} ${p.id} from ${environment}`,
           name: 'confirm'
         }]);
         if (!answers.confirm) return;

@@ -13,6 +13,7 @@ async function removeOne({
   file
 }, {
   id,
+  ignoreNotFound,
   output,
   override,
   p,
@@ -20,7 +21,12 @@ async function removeOne({
   servicePath
 }, cb) {
   if (cb) cb(id);
-  const res = await conns.web.app.service(servicePath).remove(id);
+  let res;
+  try {
+    res = await conns.web.app.service(servicePath).remove(id);
+  } catch (err) {
+    if (err.code === 404 && ignoreNotFound) return res;else throw err;
+  }
   if (p.verbose) output.push([{
     text: 'Removed',
     tail: ':',
@@ -50,18 +56,16 @@ async function removeMany(ctx, {
   const {
     conns
   } = ctx;
-  const $limit = 10;
+  const $limit = 100;
   const $select = ['_id'];
-  let $skip = 0;
   while (true) {
     const findRes = await conns.web.app.service(servicePath).find({
       query: Object.assign({}, query, {
         $limit,
-        $select,
-        $skip
+        $select
       })
     });
-    if (!(findRes && findRes.data.length)) break;
+    if (!(findRes && findRes.data && findRes.data.length)) break;
     for (const res of findRes.data) {
       await removeOne(ctx, {
         id: res._id,
@@ -74,7 +78,6 @@ async function removeMany(ctx, {
         servicePath
       }, cb);
     }
-    $skip += $limit;
   }
 }
 exports.removeMany = removeMany;

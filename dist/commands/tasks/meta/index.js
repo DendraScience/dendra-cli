@@ -245,9 +245,7 @@ const COMMANDS = [{
   title: 'Organizations'
 }, {
   prop: 'remove-organization',
-  req: 'remove-resource-objectId',
-  resource: 'organization',
-  servicePath: '/organizations'
+  req: 'remove-organization'
 }, {
   prop: 'update-organization',
   req: 'update-resource',
@@ -748,7 +746,7 @@ module.exports = ctx => {
             desc: 'One or more field/operator conditions (URI encoded)'
           }, {
             opts: '--limit=<int>',
-            desc: 'Maximum number of records to return (max 2000)'
+            desc: 'Maximum number of records (-1 for all, default 200, max 2000 for list)'
           }, {
             opts: '--sort[:desc]=<field>',
             desc: 'Sort records by field'
@@ -760,10 +758,10 @@ module.exports = ctx => {
             desc: 'Process this resource and all associated child resources'
           }, {
             opts: '--confirm',
-            desc: 'Suppress confirmation prompt (set --confirm=false for "no")'
+            desc: 'Suppress confirmation prompt (set --confirm=false to prompt)'
           }, {
             opts: '--confirm-deep',
-            desc: 'Suppress deep confirmation prompt (set --confirm-deep=false for "no")'
+            desc: 'Suppress deep confirmation prompt (set --confirm-deep=false to prompt)'
           }]
         }, {
           header: 'Patch/Push/Pull Options',

@@ -3,7 +3,7 @@ const ora = require('ora')
 const { removeOne, removeMany } = require('./_remove')
 
 module.exports = ctx => {
-  const { style, valid } = ctx
+  const { mergedSettings, style, valid } = ctx
 
   return {
     pre(p) {
@@ -25,11 +25,12 @@ module.exports = ctx => {
       let confirmDeep = p.deep ? p.confirm_deep : false
 
       if (typeof confirm !== 'boolean') {
+        const environment = mergedSettings.content.environment
         const answers = await inquirer.prompt([
           {
             type: 'confirm',
             default: false,
-            message: `Remove station ${p.id}`,
+            message: `Remove station ${p.id} from ${environment}`,
             name: 'confirm'
           }
         ])
@@ -86,6 +87,7 @@ module.exports = ctx => {
           ctx,
           {
             id: p.id,
+            ignoreNotFound: confirmDeep,
             output,
             p,
             resource: 'station',
@@ -96,6 +98,7 @@ module.exports = ctx => {
             if (spinner) spinner.text = `Removing station: ${id}`
           }
         )
+        if (!station) count--
       }
 
       if (spinner) {

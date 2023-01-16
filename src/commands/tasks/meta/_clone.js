@@ -53,7 +53,7 @@ async function cloneMany(ctx, { output, p, query, resource, servicePath }, cb) {
       })
     })
 
-    if (!(findRes && findRes.data.length)) break
+    if (!(findRes && findRes.data && findRes.data.length)) break
 
     for (const res of findRes.data) {
       try {

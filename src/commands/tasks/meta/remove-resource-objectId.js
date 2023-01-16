@@ -2,7 +2,7 @@ const inquirer = require('inquirer')
 const { removeOne } = require('./_remove')
 
 module.exports = (ctx, { resource, servicePath }) => {
-  const { valid } = ctx
+  const { mergedSettings, valid } = ctx
 
   return {
     pre(p) {
@@ -21,11 +21,12 @@ module.exports = (ctx, { resource, servicePath }) => {
 
     async execute(p) {
       if (!p.confirm) {
+        const environment = mergedSettings.content.environment
         const answers = await inquirer.prompt([
           {
             type: 'confirm',
             default: false,
-            message: `Remove ${resource} ${p.id}`,
+            message: `Remove ${resource} ${p.id} from ${environment}`,
             name: 'confirm'
           }
         ])

@@ -62,7 +62,7 @@ async function cloneMany(ctx, {
         $skip
       })
     });
-    if (!(findRes && findRes.data.length)) break;
+    if (!(findRes && findRes.data && findRes.data.length)) break;
     for (const res of findRes.data) {
       try {
         await cloneOne(ctx, {

@@ -1,6 +1,7 @@
 {
   "connections": {
     "web": {
+      "remove_not_dangerous": true,
       "url": "https://api.dendra-dev-ins1.cuahsi.dendra.science/v2"
     }
   }

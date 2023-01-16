@@ -1,6 +1,7 @@
 {
   "connections": {
     "web": {
+      "remove_not_dangerous": true,
       "url": "http://localhost:3030"
     }
   }
