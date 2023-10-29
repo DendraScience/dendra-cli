@@ -22,7 +22,7 @@ function queryArgs(p, tableOpts, override) {
     try {
       q = JSON.parse(q);
     } catch (e) {
-      throw new Error('Cannot parse query');
+      throw new Error(`Cannot parse query\n  ${q}`);
     }
   } else {
     q = {};
@@ -105,7 +105,7 @@ function params(p) {
     try {
       q = JSON.parse(q);
     } catch (e) {
-      throw new Error('Cannot parse params');
+      throw new Error(`Cannot parse params\n  ${q}`);
     }
   } else {
     q = {};

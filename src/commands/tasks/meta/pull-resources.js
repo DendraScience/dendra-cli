@@ -36,8 +36,8 @@ module.exports = (
 
       const suffix = `.${resource}.json`
       const output = []
-      const limit =
-        p.query.$limit === -1 ? Number.MAX_SAFE_INTEGER : p.query.$limit
+      const limitAll = p.query.$limit === -1
+      const limit = limitAll ? Number.MAX_SAFE_INTEGER : p.query.$limit
       const $limit = 2000
       let $skip = 0
       let count = 0
@@ -61,7 +61,8 @@ module.exports = (
           break
         }
 
-        if (!bar)
+        if (!bar) {
+          const total = findRes.total | 0
           bar = new ProgressBar(
             `Downloading ${title.toLowerCase()} [:bar] :current/:total`,
             {
@@ -69,10 +70,11 @@ module.exports = (
               incomplete: ' ',
               renderThrottle: 0,
               stream: process.stdout,
-              total: Math.min(findRes.total | 0, limit),
+              total: limitAll ? total : Math.min(total, limit),
               width: 20
             }
           )
+        }
 
         for (const item of findRes.data) {
           const fn = path.join(p.dir || '', `${item._id}${suffix}`)
@@ -106,9 +108,11 @@ module.exports = (
             })
             if (p.verbose && Array.isArray(out)) output.push(...out)
           }
+
+          count++
+          if (count >= limit) break
         }
 
-        count++
         $skip += $limit
 
         output.push(style.EMPTY)
