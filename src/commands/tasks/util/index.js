@@ -67,6 +67,13 @@ const COMMANDS = [
   },
   { prop: 'list-uploads', req: 'list-uploads' },
   {
+    prop: 'patch-uploads',
+    req: '../meta/patch-resources',
+    resource: 'upload',
+    servicePath: '/uploads',
+    title: 'Uploads'
+  },
+  {
     prop: 'remove-upload',
     req: '../meta/remove-resource-objectId',
     resource: 'upload',
@@ -123,6 +130,12 @@ module.exports = ctx => {
               lbl: 'util',
               cmd: 'remove-*',
               opts: '--id=<id> [--deep] [--confirm] [--confirm-deep] [--file=<file> | --save] [--output=indent|raw] [--verbose]'
+            },
+            {},
+            {
+              lbl: 'util',
+              cmd: 'patch-*',
+              opts: '[--query=<query>] [--<field>[:<op>]=<value> ...] [--limit=<int>] [--sort[:desc]=<field>] [--jsonata=<jsonata>] [--output=indent|raw] [--dry-run] [--verbose]'
             }
           ],
           groups: [
@@ -176,6 +189,35 @@ module.exports = ctx => {
               ]
             },
             {
+              header: 'Patch Options',
+              items: [
+                {
+                  opts: '--dir=<dir>',
+                  desc: 'Name of directory to save files to'
+                },
+                {
+                  opts: '--filespec=<filespec>',
+                  desc: 'Pattern to match one or more files'
+                },
+                {
+                  opts: '--jsonata=<jsonata>',
+                  desc: 'Name of file containing a JSONata expression (https://jsonata.org/)'
+                },
+                {
+                  opts: '--only=<verb>',
+                  desc: 'Restrict uploading to create or update'
+                },
+                {
+                  opts: '--any-suffix',
+                  desc: 'Process all matching files (don\'t require "*.<resource>.json")'
+                },
+                {
+                  opts: '--dry-run',
+                  desc: 'Process files and records without doing anything'
+                }
+              ]
+            },
+            {
               header: 'Subcommands',
               items: [
                 {
@@ -194,7 +236,11 @@ module.exports = ctx => {
                   cmd: 'update-<resource>',
                   desc: 'Replace <resource> from <file> or "<id>.<resource>.json"'
                 },
-                { cmd: 'remove-<resource>', desc: 'Destroy <resource> <id>' }
+                { cmd: 'remove-<resource>', desc: 'Destroy <resource> <id>' },
+                {
+                  cmd: 'patch-uploads',
+                  desc: 'Patch matching uploads using <jsonata> or "patch.upload.jsonata"'
+                }
               ]
             },
             {
